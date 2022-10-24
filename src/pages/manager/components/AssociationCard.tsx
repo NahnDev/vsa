@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import "chart.js/auto"
 import { faCommentAlt, faUser } from "@fortawesome/free-regular-svg-icons"
-import { faUserAlt } from "@fortawesome/free-solid-svg-icons"
+import { faGear, faLock, faUserAlt } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import clsx from "clsx"
 import { Line } from "react-chartjs-2"
@@ -40,12 +40,12 @@ export default function AssociationCard() {
                 <div className="flex-1"></div>
                 <div className="flex flex-row">
                     <div className="px-5">
-                        <FontAwesomeIcon icon={faUserAlt} />
-                        <span className="px-2">1212</span>
+                        <FontAwesomeIcon icon={faGear} />
+                        <span className="px-2">Thiet lap</span>
                     </div>
                     <div className="px-5">
-                        <FontAwesomeIcon icon={faCommentAlt} />
-                        <span className="px-2">1212</span>
+                        <FontAwesomeIcon icon={faLock} />
+                        <span className="px-2">Khoa don vi</span>
                     </div>
                 </div>
             </div>

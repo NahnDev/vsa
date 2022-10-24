@@ -4,6 +4,7 @@ import {
     faAdd,
     faCircleInfo,
     faImages,
+    faRotate,
     faShare,
     faShareNodes,
     faTag,
@@ -11,34 +12,92 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon, FontAwesomeIconProps } from "@fortawesome/react-fontawesome"
 import clsx from "clsx"
-import React, { PropsWithChildren, useRef } from "react"
+import React, { PropsWithChildren, useEffect, useRef, useState } from "react"
+import { useParams } from "react-router-dom"
 import Input from "../../../components/common/Input"
 import Textarea from "../../../components/common/Textarea"
+import ImageUploader from "../../../components/ImageUploader"
+import useDebounce from "../../../hooks/useDebounce"
+import AssociationApi from "../../../stores/api/AssociationApi"
+import TAssociation from "../../../types/TAssociation"
 
 export default function ManagerGeneralPage() {
+    const [data, bounced, setData] = useDebounce<TAssociation | undefined>(undefined, 1000)
+    const [loading, setLoading] = useState(false)
+    const id = useParams()["aId"] || ""
+
+    const handleSave = () => {
+        if (!bounced) return
+        setLoading(true)
+        AssociationApi.update(id, bounced)
+            .then()
+            .finally(() => setLoading(false))
+    }
+    const handleLoad = () => {
+        setLoading(true)
+        AssociationApi.findOne(id)
+            .then(setData)
+            .finally(() => setLoading(false))
+    }
+
+    useEffect(() => {
+        handleLoad()
+    }, [])
+
+    useEffect(() => {
+        handleSave()
+    }, [bounced])
+
+    if (!data) return <div className="">Loading</div>
     return (
         <div className="p-5 pl-0 h-full overflow-y-auto">
             <div className="bg-white rounded-md p-5">
+                <div className="flex flex-row justify-end px-10">
+                    <button
+                        className={clsx([
+                            "button",
+                            " flex flex-row gap-2",
+                            "justify-center items-center",
+                            loading ? "text-third" : "text-gray ",
+                            "text-sm ",
+                        ])}
+                        onClick={handleSave}
+                    >
+                        <FontAwesomeIcon className={loading ? "animate-spin" : ""} icon={faRotate} />
+                        <span>Save</span>
+                    </button>
+                </div>
                 <h1 className="p-5 text-xl text-center text-dark font-bold uppercase">Thiết lập chung</h1>
+
                 <div className="p-5">
                     <div className="w-1/2">
                         <div className="p-2 font-semibold">Tên đơn vị:</div>
                         <div className="px-5">
-                            <Input value="Chi hội sinh viên Mỹ Thành Phước" leftIcon={faArrowAltCircleRight} />
+                            <Input
+                                value={data.name}
+                                leftIcon={faArrowAltCircleRight}
+                                onChange={(e) => setData({ ...data, name: e.target.value })}
+                            />
                         </div>
                     </div>
                     <div className="w-1/2">
                         <div className="p-2 font-semibold">Uri:</div>
                         <div className="px-5">
-                            <Input value={`@${"CHSV.MYTHANHPHUOC"}`} className="text-sm" leftIcon={faTag} />
+                            <Input
+                                value={`${data.uri}`}
+                                className="text-sm"
+                                leftIcon={faTag}
+                                onChange={(e) => setData({ ...data, uri: e.target.value })}
+                            />
                         </div>
                     </div>
                     <div className="w-3/4">
                         <div className="p-2 font-semibold">Giới thiệu</div>
                         <div className="px-5">
                             <Textarea
-                                value="Chi hội sinh viên Mỹ Thành Phước là nơi tập hợp của tất cả các sinh viên ở TP. Mỹ Tho, huyện Châu Thành và huyện Tân Phước đang học tập và làm việc tại Trường Đại học Cần Thơ, có thể lên trao đổi kinh nghiệm, cập nhật thông tin mới về nhân sự, công tác, hoạt động hiện nay của Chi hội. Đặc biệt, tôi tạo nhóm này dành để thông báo những thông tin chính thống nhất"
+                                value={data.introduction}
                                 rows={5}
+                                onChange={(e) => setData({ ...data, introduction: e.target.value })}
                             />
                         </div>
                     </div>
@@ -48,24 +107,39 @@ export default function ManagerGeneralPage() {
                     <div className="p-5">
                         <div className="p-2 text-facebook">
                             <Input
-                                value="http://facebook.com/groups/chsv.my.thanh.phuoc.dhct"
+                                value={data.social?.facebook}
                                 leftIcon={faFacebook as any}
+                                onChange={(e) =>
+                                    setData({ ...data, social: { ...(data.social || {}), facebook: e.target.value } })
+                                }
                             />
                         </div>
                         <div className="p-2 text-twitter">
                             <Input
-                                value="http://twitter.com/groups/chsv.my.thanh.phuoc.dhct"
+                                value={data.social?.twitter}
                                 leftIcon={faTwitter as any}
+                                onChange={(e) =>
+                                    setData({ ...data, social: { ...(data.social || {}), facebook: e.target.value } })
+                                }
                             />
                         </div>
                         <div className="p-2 text-google">
                             <Input
-                                value="http://youtube.com/chanels/chsv.my.thanh.phuoc.dhct"
+                                value={data.social?.youtube}
                                 leftIcon={faYoutube as any}
+                                onChange={(e) =>
+                                    setData({ ...data, social: { ...(data.social || {}), facebook: e.target.value } })
+                                }
                             />
                         </div>
                         <div className="p-2 text-tiktok">
-                            <Input value="http://tiktok.com//chsv.my.thanh.phuoc.dhct" leftIcon={faTiktok as any} />
+                            <Input
+                                value={data.social?.tiktok}
+                                leftIcon={faTiktok as any}
+                                onChange={(e) =>
+                                    setData({ ...data, social: { ...(data.social || {}), facebook: e.target.value } })
+                                }
+                            />
                         </div>
                     </div>
                 </div>
@@ -112,21 +186,18 @@ function Label(props: PropsWithChildren<{ icon?: FontAwesomeIconProps["icon"] }>
 }
 
 function ImagePicker(props: { className?: string }) {
-    const ref = useRef<HTMLInputElement>(null)
-
     return (
-        <div
+        <ImageUploader
+            onCompleted={(data) => data.filename}
             className={clsx([
                 "flex bg-light bg-opacity-20 justify-center items-center cursor-pointer",
                 props.className,
             ])}
-            onClick={() => ref.current?.click()}
         >
             <label htmlFor="" className="flex flex-1 flex-row gap-2 justify-center items-center text-darkless">
                 <FontAwesomeIcon icon={faUpload}></FontAwesomeIcon>
                 <span>Upload images</span>
             </label>
-            <input className="hidden" ref={ref} type="file" accept=".png,.jpeg"></input>
-        </div>
+        </ImageUploader>
     )
 }
