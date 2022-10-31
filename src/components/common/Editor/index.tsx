@@ -4,6 +4,9 @@ import ReactQuill from "react-quill"
 import clsx from "clsx"
 import "./style.css"
 
+//@ts-expect-error
+import ImageResize from "quill-image-resize-module-react"
+
 const CustomUndo = () => (
     <svg viewBox="0 0 18 18">
         <polygon className="ql-fill ql-stroke" points="6 10 4 12 2 10 6 10" />
@@ -36,6 +39,7 @@ Quill.register(Size, true)
 const Font = Quill.import("formats/font")
 Font.whitelist = ["arial", "comic-sans", "courier-new", "georgia", "helvetica", "lucida"]
 Quill.register(Font, true)
+Quill.register("modules/imageResize", ImageResize)
 
 // Modules object for setting up the Quill editor
 export const modules = {
@@ -50,6 +54,10 @@ export const modules = {
         delay: 500,
         maxStack: 100,
         userOnly: true,
+    },
+    imageResize: {
+        parchment: Quill.import("parchment"),
+        modules: ["Resize", "DisplaySize"],
     },
 }
 
@@ -158,7 +166,7 @@ export default function Editor(props: {
     }, [])
 
     return (
-        <div className="text-editor" onClick={(e) => e.preventDefault()}>
+        <div className="text-editor h-full grid grid-rows-[auto_1fr]" onClick={(e) => e.preventDefault()}>
             {/* <div
                 onClick={(e) => e.preventDefault()}
                 className={clsx([props.readonly && "hidden", "sticky top-0 bg-white z-50"])}
@@ -167,6 +175,7 @@ export default function Editor(props: {
             {/* </div> */}
             <ReactQuill
                 theme="snow"
+                className="quill overflow-y-auto"
                 readOnly={props.readonly}
                 value={props.value}
                 onChange={props.onChange}

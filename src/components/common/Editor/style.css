@@ -6,18 +6,12 @@
  */
  .ql-container {
   box-sizing: border-box;
-  font-size: 16px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
   height: 100%;
   margin: 0px;
   position: relative;
-  
 }
-.ql-container  * {
-  font-family: 'Signika Negative';
-  line-height: 1.5em;
-  font-size: 1em;
-}
-
 .ql-container.ql-disabled .ql-tooltip {
   visibility: hidden;
 }
@@ -68,7 +62,7 @@
 }
 .ql-editor ol,
 .ql-editor ul {
-  /* padding-left: 1.5em; */
+  padding-left: 1.5em;
 }
 .ql-editor ol > li,
 .ql-editor ul > li {
@@ -113,7 +107,7 @@
 }
 .ql-editor ol li:not(.ql-direction-rtl),
 .ql-editor ul li:not(.ql-direction-rtl) {
-  /* padding-left: 1.5em; */
+  padding-left: 1.5em;
 }
 .ql-editor ol li.ql-direction-rtl,
 .ql-editor ul li.ql-direction-rtl {
@@ -364,7 +358,12 @@
 .ql-editor .ql-color-purple {
   color: #93f;
 }
-
+.ql-editor .ql-font-serif {
+  font-family: Georgia, Times New Roman, serif;
+}
+.ql-editor .ql-font-monospace {
+  font-family: Monaco, Courier New, monospace;
+}
 .ql-editor .ql-size-small {
   font-size: 0.75em;
 }
@@ -380,7 +379,10 @@
 }
 .ql-editor .ql-align-center {
   text-align: center;
+  justify-content: center;
+  display: flex;
 }
+
 .ql-editor .ql-align-justify {
   text-align: justify;
 }
@@ -806,7 +808,12 @@
 .ql-snow .ql-picker.ql-font .ql-picker-item[data-value=monospace]::before {
   content: 'Monospace';
 }
-
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value=serif]::before {
+  font-family: Georgia, Times New Roman, serif;
+}
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value=monospace]::before {
+  font-family: Monaco, Courier New, monospace;
+}
 .ql-snow .ql-picker.ql-size {
   width: 98px;
 }
@@ -844,6 +851,7 @@
 .ql-toolbar.ql-snow {
   border: 1px solid #ccc;
   box-sizing: border-box;
+  font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
   padding: 8px;
 }
 .ql-toolbar.ql-snow .ql-formats {
@@ -854,7 +862,7 @@
 }
 .ql-toolbar.ql-snow .ql-picker-options {
   border: 1px solid transparent;
-  /* box-shadow: rgba(0,0,0,0.2) 0 2px 8px; */
+  box-shadow: rgba(0,0,0,0.2) 0 2px 8px;
 }
 .ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-label {
   border-color: #ccc;
@@ -872,7 +880,7 @@
 .ql-snow .ql-tooltip {
   background-color: #fff;
   border: 1px solid #ccc;
-  /* box-shadow: 0px 0px 5px #ddd; */
+  box-shadow: 0px 0px 5px #ddd;
   color: #444;
   padding: 5px 12px;
   white-space: nowrap;
@@ -885,7 +893,7 @@
 .ql-snow .ql-tooltip input[type=text] {
   display: none;
   border: 1px solid #ccc;
-  font-size: 16px;
+  font-size: 13px;
   height: 26px;
   margin: 0px;
   padding: 3px 5px;
@@ -936,9 +944,5 @@
   color: #06c;
 }
 .ql-container.ql-snow {
-  /* border: 1px solid #ccc; */
-}
-
-.ql-clipboard {
-  position: fixed;
+  border: 1px solid #ccc;
 }

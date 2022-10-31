@@ -17,6 +17,7 @@ import clsx from "clsx"
 import React from "react"
 import { Link, LinkProps, RouteProps, useLocation, useRoutes } from "react-router-dom"
 import NavLink, { TNavLinkProps } from "../../components/common/NavLink"
+import AssociationChat from "./AssociationChat"
 
 const LINKS: TNavLinkProps[] = [
     {
@@ -29,7 +30,7 @@ const LINKS: TNavLinkProps[] = [
         to: "./discussion",
         icon: faNoteSticky,
         label: "Thảo luận",
-        checker: /^\/associations\/post$/,
+        checker: /^\/associations\/discussion$/,
     },
     {
         to: "./events",
@@ -110,6 +111,7 @@ export default function AssociationNavigator() {
                     </li>
                 </ul>
             </div>
+            <AssociationChat />
         </div>
     )
 }
