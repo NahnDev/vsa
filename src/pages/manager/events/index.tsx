@@ -19,7 +19,7 @@ export default function ManagerEventPage() {
                             <div className="flex flex-row p-2">
                                 <div className="flex-1"></div>
                                 <div>
-                                    <Dropdown></Dropdown>
+                                    <Dropdown data={data} onSelected={(value) => {}}></Dropdown>
                                 </div>
                             </div>
                         </div>
@@ -36,3 +36,22 @@ export default function ManagerEventPage() {
         </div>
     )
 }
+
+const data = [
+    {
+        label: "2020-2021",
+        value: { _id: "1312" },
+    },
+    {
+        label: "2018-2019",
+        value: { _id: "1312" },
+    },
+    {
+        label: "2019-2020",
+        value: { _id: "1312" },
+    },
+    {
+        label: "2021-2021",
+        value: { _id: "1312" },
+    },
+]

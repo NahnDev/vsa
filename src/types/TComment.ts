@@ -2,8 +2,10 @@ import TUser from "./TUser"
 
 type TComment = {
     _id: string
+    post: string
     content: string
-    user: TUser
-    replies: TComment[]
+    sender: string
+    at: number
+    likes: string[]
 }
 export default TComment

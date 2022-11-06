@@ -6,7 +6,7 @@
  */
  .ql-container {
   box-sizing: border-box;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: 'Signika Negative', sans-serif;
   font-size: 13px;
   height: 100%;
   margin: 0px;
@@ -30,6 +30,8 @@
   padding: 0;
 }
 .ql-editor {
+  font-size: 16px;
+  font-family: 'Signika Negative', sans-serif;
   box-sizing: border-box;
   line-height: 1.42;
   height: 100%;
@@ -359,10 +361,10 @@
   color: #93f;
 }
 .ql-editor .ql-font-serif {
-  font-family: Georgia, Times New Roman, serif;
+  font-family: 'Signika Negative', sans-serif
 }
 .ql-editor .ql-font-monospace {
-  font-family: Monaco, Courier New, monospace;
+  font-family: 'Signika Negative', sans-serif
 }
 .ql-editor .ql-size-small {
   font-size: 0.75em;
@@ -809,10 +811,10 @@
   content: 'Monospace';
 }
 .ql-snow .ql-picker.ql-font .ql-picker-item[data-value=serif]::before {
-  font-family: Georgia, Times New Roman, serif;
+  font-family: 'Signika Negative', sans-serif;
 }
 .ql-snow .ql-picker.ql-font .ql-picker-item[data-value=monospace]::before {
-  font-family: Monaco, Courier New, monospace;
+  font-family: 'Signika Negative', sans-serif;
 }
 .ql-snow .ql-picker.ql-size {
   width: 98px;
@@ -851,7 +853,7 @@
 .ql-toolbar.ql-snow {
   border: 1px solid #ccc;
   box-sizing: border-box;
-  font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  font-family: 'Signika Negative', sans-serif;
   padding: 8px;
 }
 .ql-toolbar.ql-snow .ql-formats {

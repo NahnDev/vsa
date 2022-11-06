@@ -16,14 +16,14 @@ export default function LoginPage() {
     const navigate = useNavigate()
 
     const [loading, setLoading] = useState(false)
-    const [dto, setDto] = useState<TLoginDto>({ email: "", password: "" })
     const [error, setError] = useState<Error | null>(null)
+    const [dto, setDto] = useState<TLoginDto>({ email: "", password: "" })
 
     const handleLogin = async () => {
         setLoading(true)
         try {
             await dispatch(UserActions.login(dto))
-            navigate("/")
+            navigate("/profiles/me")
         } catch (e) {
             setError(e as Error)
         } finally {
@@ -55,10 +55,17 @@ export default function LoginPage() {
                         value={dto.password}
                         onChange={(e) => setDto({ ...dto, password: e.target.value })}
                     />
-                    <div className="text-error flex flex-row items-center gap-2 text-sm pl-10">
+
+                    <div
+                        className={clsx([
+                            "text-error flex flex-row items-center gap-2 text-sm pl-10",
+                            error ? "" : "!hidden",
+                        ])}
+                    >
                         <FontAwesomeIcon icon={faCircleExclamation}></FontAwesomeIcon>
                         <span>{error?.message}</span>
                     </div>
+
                     <div className="flex justify-end items-center">
                         <Link to={"/auth/forget"}>
                             <p className="text-third text-sm">Forget password?</p>

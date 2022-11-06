@@ -1,116 +1,28 @@
 import { Badge } from "@mui/material"
-import React from "react"
+import React, { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 import Chat from "../../../components/chat"
 import Input from "../../../components/common/Input"
 import Post, { TPostProps } from "../../../components/post"
 import PostCreator from "../../../components/post/PostCreator"
-
-const posts: TPostProps[] = [
-    {
-        data: {
-            _id: "1231231231",
-            sender: {
-                _id: "23423423",
-                avatar: "https://cdn.pixabay.com/photo/2022/10/01/22/38/sugarloaf-rock-7492389__480.jpg",
-                name: "Le Tahanh Nhan",
-            },
-            content: {
-                text: "Hello toi la le thanh nhan, hahahah",
-                images: [],
-            },
-            like: 912,
-            share: 12,
-            at: Date.now(),
-        },
-    },
-    {
-        data: {
-            _id: "1231232231",
-            sender: {
-                _id: "23423423",
-                avatar: "https://cdn.pixabay.com/photo/2022/10/01/22/38/sugarloaf-rock-7492389__480.jpg",
-                name: "Le Tahanh Nhan",
-            },
-            content: {
-                text: "Hello toi la le thanh nhan, hahahah",
-                images: [],
-            },
-            like: 912,
-            share: 12,
-            at: Date.now(),
-        },
-    },
-    {
-        data: {
-            _id: "1231sa231231",
-            sender: {
-                _id: "23423423",
-                avatar: "https://cdn.pixabay.com/photo/2022/10/01/22/38/sugarloaf-rock-7492389__480.jpg",
-                name: "Le Tahanh Nhan",
-            },
-            content: {
-                text: "Hello toi la le thanh nhan, hahahah",
-                images: [],
-            },
-            like: 912,
-            share: 12,
-            at: Date.now(),
-        },
-    },
-    {
-        data: {
-            _id: "123123e1231",
-            sender: {
-                _id: "23423423",
-                avatar: "https://cdn.pixabay.com/photo/2022/10/01/22/38/sugarloaf-rock-7492389__480.jpg",
-                name: "Le Tahanh Nhan",
-            },
-            content: {
-                text: "Hello toi la le thanh nhan, hahahah",
-                images: [],
-            },
-            like: 912,
-            share: 12,
-            at: Date.now(),
-        },
-    },
-    {
-        data: {
-            _id: "1231232d231",
-            sender: {
-                _id: "23423423",
-                avatar: "https://cdn.pixabay.com/photo/2022/10/01/22/38/sugarloaf-rock-7492389__480.jpg",
-                name: "Le Tahanh Nhan",
-            },
-            content: {
-                text: "Hello toi la le thanh nhan, hahahah",
-                images: [],
-            },
-            like: 912,
-            share: 12,
-            at: Date.now(),
-        },
-    },
-    {
-        data: {
-            _id: "1231sa2312a31",
-            sender: {
-                _id: "23423423",
-                avatar: "https://cdn.pixabay.com/photo/2022/10/01/22/38/sugarloaf-rock-7492389__480.jpg",
-                name: "Le Tahanh Nhan",
-            },
-            content: {
-                text: "Hello toi la le thanh nhan, hahahah",
-                images: [],
-            },
-            like: 912,
-            share: 12,
-            at: Date.now(),
-        },
-    },
-]
+import PostApi from "../../../stores/api/PostApi"
+import TPost from "../../../types/TPost"
 
 export default function AssociationDiscussionPage() {
+    const { aId = "" } = useParams()
+    const [posts, setPosts] = useState<TPost[]>([])
+    const load = async () => {
+        try {
+            const posts = await PostApi.findAll({ association: aId })
+            setPosts(posts)
+        } finally {
+        }
+    }
+
+    useEffect(() => {
+        load()
+    }, [])
+
     return (
         <div className="w-full  flex flex-row relative">
             <div className="flex-1 rounded-sm  ">
@@ -118,7 +30,7 @@ export default function AssociationDiscussionPage() {
                 <ul>
                     <li>
                         {posts.map((post) => (
-                            <Post data={post.data} key={post.data._id} />
+                            <Post data={post} key={post._id} />
                         ))}
                     </li>
                 </ul>

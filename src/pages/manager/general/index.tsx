@@ -14,12 +14,14 @@ import { FontAwesomeIcon, FontAwesomeIconProps } from "@fortawesome/react-fontaw
 import clsx from "clsx"
 import React, { PropsWithChildren, useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom"
+import AutoSaveButton from "../../../components/common/AutoSaveButton"
 import Input from "../../../components/common/Input"
 import Textarea from "../../../components/common/Textarea"
-import ImageUploader from "../../../components/ImageUploader"
+import ImageUploader, { TImageUploaderProps } from "../../../components/image/ImageUploader"
 import useDebounce from "../../../hooks/useDebounce"
 import AssociationApi from "../../../stores/api/AssociationApi"
 import TAssociation from "../../../types/TAssociation"
+import TResource from "../../../types/TResource"
 
 export default function ManagerGeneralPage() {
     const [data, bounced, setData] = useDebounce<TAssociation | undefined>(undefined, 1000)
@@ -52,21 +54,7 @@ export default function ManagerGeneralPage() {
     return (
         <div className="p-5 pl-0 h-full overflow-y-auto">
             <div className="bg-white rounded-md p-5">
-                <div className="flex flex-row justify-end px-10">
-                    <button
-                        className={clsx([
-                            "button",
-                            " flex flex-row gap-2",
-                            "justify-center items-center",
-                            loading ? "text-third" : "text-gray ",
-                            "text-sm ",
-                        ])}
-                        onClick={handleSave}
-                    >
-                        <FontAwesomeIcon className={loading ? "animate-spin" : ""} icon={faRotate} />
-                        <span>Save</span>
-                    </button>
-                </div>
+                <AutoSaveButton onClick={handleSave} loading={loading} />
                 <h1 className="p-5 text-xl text-center text-dark font-bold uppercase">Thiết lập chung</h1>
 
                 <div className="p-5">
@@ -147,19 +135,30 @@ export default function ManagerGeneralPage() {
                     <Label icon={faImages}>Hình ảnh</Label>
                     <div className="p-5">
                         <div className="grid grid-cols-[1fr_1fr_1fr] gap-2">
-                            <div>
-                                <img
-                                    src="https://cdn.dribbble.com/users/725005/screenshots/6206615/media/595a28aad51102946e4a956b8c351d29.png?compress=1&resize=400x300&vertical=top"
-                                    alt=""
-                                />
-                            </div>
-                            <div>
-                                <img
-                                    src="https://cdn.dribbble.com/users/725005/screenshots/6206615/media/595a28aad51102946e4a956b8c351d29.png?compress=1&resize=400x300&vertical=top"
-                                    alt=""
-                                />
-                            </div>
-                            <ImagePicker />
+                            <ImagePicker
+                                default={data.images[0]}
+                                onCompleted={(res) => {
+                                    const images = [...data.images]
+                                    images[0] = res._id
+                                    setData({ ...data, images })
+                                }}
+                            />
+                            <ImagePicker
+                                default={data.images[1]}
+                                onCompleted={(res) => {
+                                    const images = [...data.images]
+                                    images[1] = res._id
+                                    setData({ ...data, images })
+                                }}
+                            />
+                            <ImagePicker
+                                default={data.images[2]}
+                                onCompleted={(res) => {
+                                    const images = [...data.images]
+                                    images[2] = res._id
+                                    setData({ ...data, images })
+                                }}
+                            />
                         </div>
                     </div>
                 </div>
@@ -167,7 +166,11 @@ export default function ManagerGeneralPage() {
                     <Label icon={faImages}>Logo</Label>
                     <div className="p-5">
                         <div className="grid grid-cols-[1fr_1fr_1fr] gap-2">
-                            <ImagePicker className="h-40 w-40 rounded-full overflow-hidden" />
+                            <ImagePicker
+                                default={data.logo}
+                                onCompleted={(res) => setData({ ...data, logo: res._id })}
+                                className="h-40 w-40 rounded-full overflow-hidden"
+                            />
                         </div>
                     </div>
                 </div>
@@ -185,19 +188,16 @@ function Label(props: PropsWithChildren<{ icon?: FontAwesomeIconProps["icon"] }>
     )
 }
 
-function ImagePicker(props: { className?: string }) {
+function ImagePicker(props: { className?: string } & Pick<TImageUploaderProps, "default" | "onCompleted">) {
+    console.log({ props })
+
     return (
         <ImageUploader
-            onCompleted={(data) => data.filename}
+            {...props}
             className={clsx([
                 "flex bg-light bg-opacity-20 justify-center items-center cursor-pointer",
                 props.className,
             ])}
-        >
-            <label htmlFor="" className="flex flex-1 flex-row gap-2 justify-center items-center text-darkless">
-                <FontAwesomeIcon icon={faUpload}></FontAwesomeIcon>
-                <span>Upload images</span>
-            </label>
-        </ImageUploader>
+        />
     )
 }

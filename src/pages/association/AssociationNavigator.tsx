@@ -14,9 +14,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon, FontAwesomeIconProps } from "@fortawesome/react-fontawesome"
 import clsx from "clsx"
-import React from "react"
-import { Link, LinkProps, RouteProps, useLocation, useRoutes } from "react-router-dom"
+import React, { useEffect, useState } from "react"
+import { Link, LinkProps, RouteProps, useLocation, useParams, useRoutes } from "react-router-dom"
 import NavLink, { TNavLinkProps } from "../../components/common/NavLink"
+import Image from "../../components/image/ResourceImage"
+import AssociationApi from "../../stores/api/AssociationApi"
+import TAssociation from "../../types/TAssociation"
 import AssociationChat from "./AssociationChat"
 
 const LINKS: TNavLinkProps[] = [
@@ -24,46 +27,52 @@ const LINKS: TNavLinkProps[] = [
         to: "./",
         icon: faHomeAlt,
         label: "Trang chủ",
-        checker: /^\/associations\/$/,
+        checker: /\/+$/,
     },
     {
         to: "./discussion",
         icon: faNoteSticky,
         label: "Thảo luận",
-        checker: /^\/associations\/discussion$/,
+        checker: /\/discussion$/,
     },
     {
         to: "./events",
         icon: faNoteSticky,
         label: "Sự kiện, hoạt động",
-        checker: /^\/associations\/events$/,
+        checker: /\/events$/,
     },
     {
         to: "./picture",
         icon: faImage,
         label: "Hình ảnh, tài nguyên",
-        checker: /^\/associations\/picture$/,
+        checker: /\/picture$/,
     },
     {
         to: "./members",
         icon: faUsers,
         label: "Thành viên",
-        checker: /^\/associations\/members$/,
+        checker: /\/members$/,
     },
 ]
 export default function AssociationNavigator() {
     const handleBack = () => window.history.back()
+    const { aId } = useParams()
+    const [data, setData] = useState<TAssociation | undefined>(undefined)
+
+    useEffect(() => {
+        AssociationApi.findOne(aId || "").then(setData)
+    }, [aId])
 
     return (
         <div className="h-full w-[300px]">
             <div className={clsx(["shadow-md h-full", "rounded-md", "p-5 bg-white", "flex flex-col"])}>
                 <div className="pb-4">
                     <div className={clsx(["h-40 overflow-hidden", " flex justify-center items-center"])}>
-                        <img src="/assets/images/banner.jpeg" className="h-full" alt="" />
+                        <Image _id={data?.logo} className="h-full" alt="" />
                     </div>
                     <div>
-                        <h6 className="text-xs uppercase text-dark">@CHSV.MYTHANHPHUOC</h6>
-                        <h1 className="text-lg font-bold uppercase text-darker">Chi hội sinh viên mỹ thành phước</h1>
+                        <h6 className="text-xs uppercase text-dark">@{data?.uri}</h6>
+                        <h1 className="text-lg font-bold uppercase text-darker">{data?.name}</h1>
                     </div>
                     <ul className={clsx(["flex flex-row justify-end gap-2 p-2 "])}>
                         <li>

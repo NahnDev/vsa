@@ -16,7 +16,7 @@ export default function MainRouter() {
                         <Route path="/auth/*" element={<AuthRouter />}></Route>
                         <Route path="/events/*" element={<EventPage />}></Route>
                         <Route path="/profiles/*" element={<ProfilePage />}></Route>
-                        <Route path="/associations/*" element={<AssociationRouter />}></Route>
+                        <Route path="/associations/:aId/*" element={<AssociationRouter />}></Route>
                         <Route path="/associations/:aId/manager/*" element={<ManagerPage />}></Route>
                     </Routes>
                 </AppLayout>
