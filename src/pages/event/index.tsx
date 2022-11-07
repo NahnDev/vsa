@@ -1,10 +1,7 @@
 import React from "react"
 import { Route, Routes } from "react-router-dom"
+import EventRouter from "./EventRouter"
 
 export default function EventPage() {
-    return (
-        <Routes>
-            <Route path="/:id" element={<div />} />
-        </Routes>
-    )
+    return <EventRouter />
 }

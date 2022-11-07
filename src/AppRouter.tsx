@@ -6,6 +6,7 @@ import AssociationRouter from "./pages/association"
 import AuthRouter from "./pages/auth"
 import EventPage from "./pages/event"
 import ProfilePage from "./pages/profile"
+import { useUser } from "./stores/user/hooks"
 
 export default function MainRouter() {
     return (

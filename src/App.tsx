@@ -5,6 +5,7 @@ import { Provider } from "react-redux"
 import { PersistGate } from "redux-persist/integration/react"
 import "./App.css"
 import MainRouter from "./AppRouter"
+import FormEditor from "./components/form/FormEditor"
 import store from "./stores"
 import { persistor } from "./stores/store"
 

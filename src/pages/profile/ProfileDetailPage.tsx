@@ -7,6 +7,7 @@ import AutoSaveButton from "../../components/common/AutoSaveButton"
 import Input from "../../components/common/Input"
 import SocialGroup from "../../components/common/SocialGroup"
 import Textarea from "../../components/common/Textarea"
+import TextareaResizable from "../../components/common/TextareaResizable"
 import ImageUploader from "../../components/image/ImageUploader"
 import useDebounce from "../../hooks/useDebounce"
 import UserApi from "../../stores/api/UserApi"
@@ -14,30 +15,30 @@ import { useUser } from "../../stores/user/hooks"
 import TUser, { TUpdateUserDto } from "../../types/TUser"
 
 export default function ProfileDetailPage() {
-    const { _id } = useUser()
-    const { uId: id = "" } = useParams()
-    const uId = useMemo(() => (id == "me" ? _id : id), [id])
+    const { _id: uId = "" } = useUser()
+    const { uId: paramId = "" } = useParams()
+    const pId = useMemo(() => (paramId == "me" ? uId : paramId), [paramId])
 
+    const [edit, setEdit] = useState(uId === pId)
     const [saving, setSaving] = useState(false)
-    const [mode, setMode] = useState<"edit" | "view">("view")
     const [user, setUser] = useState<TUser | undefined>(undefined)
     const [dto, debounced, setDto] = useDebounce<TUpdateUserDto>({}, 3000)
 
     const handleSave = async () => {
         setSaving(true)
         try {
-            await UserApi.updateOne(uId, dto)
+            await UserApi.updateOne(pId, dto)
         } finally {
             setSaving(false)
         }
     }
     const handleLoad = async () => {
-        const data = await UserApi.findOne(uId)
+        const data = await UserApi.findOne(pId)
         setUser(data)
     }
     useEffect(() => {
         handleLoad()
-    }, [uId])
+    }, [pId])
 
     useEffect(() => {
         handleSave()
@@ -56,36 +57,41 @@ export default function ProfileDetailPage() {
                         ])}
                     >
                         <ImageUploader
-                            default={dto.avatar || user.avatar}
+                            disable={!edit}
+                            default={dto.avatar ?? user.avatar}
                             onCompleted={(data) => {
                                 setDto({ ...dto, avatar: data._id })
                             }}
                         />
                     </div>
                     <div className="p-5 flex flex-col items-center justify-center">
-                        <h4 className="font-semibold text-lg text-dark text-center">NahnDev</h4>
+                        <h4 className="font-semibold text-lg text-dark text-center">{user.name}</h4>
                         <Input
+                            readOnly={!edit}
                             placeholder="Tên đầy đủ của bạn"
-                            value={dto.fullName || user.fullName}
+                            value={dto.fullName ?? user.fullName}
                             onChangeText={(fullName) => setDto({ ...dto, fullName })}
                             className="font-bold text-md text-third"
                             inputClassName="!text-center"
                         ></Input>
-                        <Textarea
-                            value={dto.introduce || user.introduce}
+                        <TextareaResizable
+                            readOnly={!edit}
+                            value={dto.introduce ?? user.introduce}
                             placeholder="Hãy giới thiệu về bản thân với mọi người"
                             onChangeText={(introduce) => setDto({ ...dto, introduce })}
-                            className="text-sm  text-darkless  w-full "
-                            inputClassName="text-center"
+                            className="text-sm  text-darkless  w-full text-center"
                         />
                     </div>
-                    <div className="w-4/5">
-                        <SocialGroup />
+                    <div className="w-full">
+                        <SocialGroup
+                            value={{ ...user.social, ...dto.social }}
+                            edit={edit}
+                            onChange={(social) => setDto({ ...dto, social })}
+                        />
                     </div>
                 </div>
                 <div className="w-3/4">
-                    <AutoSaveButton onClick={handleSave} loading={saving} className="p-5" />
-
+                    {edit && <AutoSaveButton onClick={handleSave} loading={saving} className="p-5" />}
                     <div className="p-5 px-10">
                         <div>
                             <div className="p-5">
@@ -100,9 +106,10 @@ export default function ProfileDetailPage() {
                                     <li className="flex flex-row gap-2 items-center">
                                         <FontAwesomeIcon icon={faPhone} />
                                         <Input
+                                            readOnly={!edit}
                                             placeholder="Số điện thoại của bạn"
                                             className="!bg-[transparent] -mx-4"
-                                            value={dto.phone || user.phone}
+                                            value={dto.phone ?? user.phone}
                                             onChangeText={(phone) => setDto({ ...dto, phone })}
                                         />
                                     </li>
