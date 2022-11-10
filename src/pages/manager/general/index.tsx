@@ -17,6 +17,7 @@ import { useParams } from "react-router-dom"
 import AutoSaveButton from "../../../components/common/AutoSaveButton"
 import Input from "../../../components/common/Input"
 import Textarea from "../../../components/common/Textarea"
+import TextareaResizable from "../../../components/common/TextareaResizable"
 import ImageUploader, { TImageUploaderProps } from "../../../components/image/ImageUploader"
 import useDebounce from "../../../hooks/useDebounce"
 import AssociationApi from "../../../stores/api/AssociationApi"
@@ -82,7 +83,8 @@ export default function ManagerGeneralPage() {
                     <div className="w-3/4">
                         <div className="p-2 font-semibold">Giới thiệu</div>
                         <div className="px-5">
-                            <Textarea
+                            <TextareaResizable
+                                className="w-full"
                                 value={data.introduction}
                                 rows={5}
                                 onChange={(e) => setData({ ...data, introduction: e.target.value })}
@@ -97,8 +99,8 @@ export default function ManagerGeneralPage() {
                             <Input
                                 value={data.social?.facebook}
                                 leftIcon={faFacebook as any}
-                                onChange={(e) =>
-                                    setData({ ...data, social: { ...(data.social || {}), facebook: e.target.value } })
+                                onChangeText={(facebook) =>
+                                    setData({ ...data, social: { ...(data.social || {}), facebook } })
                                 }
                             />
                         </div>
@@ -106,8 +108,8 @@ export default function ManagerGeneralPage() {
                             <Input
                                 value={data.social?.twitter}
                                 leftIcon={faTwitter as any}
-                                onChange={(e) =>
-                                    setData({ ...data, social: { ...(data.social || {}), facebook: e.target.value } })
+                                onChangeText={(twitter) =>
+                                    setData({ ...data, social: { ...(data.social || {}), twitter } })
                                 }
                             />
                         </div>
@@ -115,8 +117,8 @@ export default function ManagerGeneralPage() {
                             <Input
                                 value={data.social?.youtube}
                                 leftIcon={faYoutube as any}
-                                onChange={(e) =>
-                                    setData({ ...data, social: { ...(data.social || {}), facebook: e.target.value } })
+                                onChangeText={(youtube) =>
+                                    setData({ ...data, social: { ...(data.social || {}), youtube } })
                                 }
                             />
                         </div>
@@ -124,8 +126,8 @@ export default function ManagerGeneralPage() {
                             <Input
                                 value={data.social?.tiktok}
                                 leftIcon={faTiktok as any}
-                                onChange={(e) =>
-                                    setData({ ...data, social: { ...(data.social || {}), facebook: e.target.value } })
+                                onChangeText={(tiktok) =>
+                                    setData({ ...data, social: { ...(data.social || {}), tiktok } })
                                 }
                             />
                         </div>
