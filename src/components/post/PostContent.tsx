@@ -13,11 +13,14 @@ export default function PostContent(props: { data: TPost }) {
 
     return (
         <div className="p-5">
-            <div
-                className={clsx("overflow-hidden ql-editor", [expand ? "h-auto" : "h-[200px]"])}
-                ref={contentRef}
-                dangerouslySetInnerHTML={{ __html: props.data.content }}
-            ></div>
+            <div className={clsx(["overflow-hidden", expand ? "h-auto" : "h-[200px]"])}>
+                <article
+                    className={clsx("ql-editor !h-fit ")}
+                    ref={contentRef}
+                    dangerouslySetInnerHTML={{ __html: props.data.content }}
+                ></article>
+            </div>
+
             {!expand && (
                 <div>
                     <button onClick={() => setExpand(true)} className="button text-sm text-darkless">

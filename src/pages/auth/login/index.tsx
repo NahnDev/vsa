@@ -42,6 +42,7 @@ export default function LoginPage() {
                 </h1>
                 <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
                     <Input
+                        rounded
                         placeholder="email@domain.com"
                         value={dto.email}
                         onChange={(e) => setDto({ ...dto, email: e.target.value })}
@@ -49,6 +50,7 @@ export default function LoginPage() {
                         type="email"
                     />
                     <Input
+                        rounded
                         placeholder="password"
                         name="password"
                         type="password"

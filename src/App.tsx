@@ -1,3 +1,5 @@
+import moment from "moment"
+import "moment/locale/vi"
 import React, { useEffect } from "react"
 import { DndProvider } from "react-dnd"
 import { HTML5Backend } from "react-dnd-html5-backend"
@@ -8,6 +10,8 @@ import MainRouter from "./AppRouter"
 import FormEditor from "./components/form/FormEditor"
 import store from "./stores"
 import { persistor } from "./stores/store"
+
+moment.locale("vi")
 
 function App() {
     return (

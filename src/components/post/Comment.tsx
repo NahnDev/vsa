@@ -10,7 +10,7 @@ type TCommentProps = {
     data: TComment
 }
 export default function Comment(props: TCommentProps) {
-    const time = moment(props.data.at).format("HH:SS DD MMM YYYY")
+    const time = moment(props.data.at).format("HH:SS DD/MM/YYYY")
     return (
         <div className="p-2 ">
             <div className="flex flex-col gap-2">

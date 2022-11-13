@@ -14,7 +14,7 @@ export default function ChatInput() {
             ])}
         >
             <div className="flex-1">
-                <Input className="bg-light" />
+                <Input rounded className="bg-light" />
             </div>
             <div className="button">
                 <FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon>

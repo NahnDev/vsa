@@ -12,6 +12,10 @@ import EventCard from "../components/EventCard"
 export default function MEventMainPage() {
     const { aId = "" } = useParams()
     const [events, setEvents] = useState<TEvent[]>([])
+
+    const handleCreate = async () => {
+        EventApi.create({ association: aId }).then().finally()
+    }
     const load = async () => {
         try {
             const data = await EventApi.findAll({ association: aId })
@@ -39,8 +43,8 @@ export default function MEventMainPage() {
 
                             <div className="flex flex-row p-2">
                                 <div className="flex-1"></div>
-                                <Link
-                                    to="/events/"
+                                <button
+                                    onClick={handleCreate}
                                     className={clsx([
                                         "button ",
                                         "bg-third p-2 px-5 rounded-full",
@@ -49,8 +53,8 @@ export default function MEventMainPage() {
                                     ])}
                                 >
                                     <FontAwesomeIcon icon={faPlus} />
-                                    <span>Su kien moi</span>
-                                </Link>
+                                    <span>Tạo sự kiện mới</span>
+                                </button>
                             </div>
                         </div>
                     </div>

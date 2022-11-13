@@ -35,6 +35,7 @@ export default function CommentCreator(props: TCommentCreatorProps) {
         <div className="p-2 border-t-[1px] border-light">
             <div className="flex flex-row items-center ">
                 <Input
+                    rounded
                     onKeyDown={handleKeydown}
                     value={value}
                     onChange={(e) => setValue(e.target.value)}

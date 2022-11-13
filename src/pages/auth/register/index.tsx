@@ -54,24 +54,28 @@ export default function RegisterPage() {
                 </h1>
                 <section className="flex flex-col gap-4">
                     <Input
+                        rounded
                         onChangeText={(email) => setDto({ ...dto, email })}
                         placeholder="Email@domain.com"
                         name="email"
                         type="email"
                     />
                     <Input
+                        rounded
                         onChangeText={(name) => setDto({ ...dto, name })}
                         placeholder="Nickname"
                         name="nickname"
                         type="text"
                     />
                     <Input
+                        rounded
                         onChangeText={(password) => setDto({ ...dto, password })}
                         placeholder="Password"
                         name="password"
                         type="password"
                     />
                     <Input
+                        rounded
                         onChangeText={setConfirmPassword}
                         placeholder="Confirm password"
                         name="confirm"

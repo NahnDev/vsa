@@ -1,15 +1,17 @@
 import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons"
-import { faNoteSticky } from "@fortawesome/free-regular-svg-icons"
+import { faChartBar, faNoteSticky } from "@fortawesome/free-regular-svg-icons"
 import {
     faArrowLeft,
     faBackspace,
     faCalendar,
+    faFileText,
     faForward,
     faHeart,
     faHeartPulse,
     faHomeAlt,
     faImage,
     faMessage,
+    faUserGraduate,
     faUsers,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon, FontAwesomeIconProps } from "@fortawesome/react-fontawesome"
@@ -30,25 +32,43 @@ const LINKS: TNavLinkProps[] = [
         to: "./units",
         icon: faNoteSticky,
         label: "Đơn vị",
-        checker: /\/manager\/units$/,
+        checker: /\/manager\/units/,
     },
     {
         to: "./events",
         icon: faNoteSticky,
         label: "Sự kiện, hoạt động",
-        checker: /\/manager\/events$/,
+        checker: /\/manager\/events/,
     },
     {
         to: "./docs",
         icon: faImage,
         label: "Tài liệu",
-        checker: /\/manager\/docs$/,
+        checker: /\/manager\/docs/,
     },
     {
         to: "./members",
         icon: faUsers,
         label: "Thành viên",
-        checker: /\/manager\/members$/,
+        checker: /\/manager\/members/,
+    },
+    {
+        to: "./posts",
+        icon: faFileText,
+        label: "Bài viết",
+        checker: /\/manager\/posts/,
+    },
+    {
+        to: "./roles",
+        icon: faUserGraduate,
+        label: "Vai trò",
+        checker: /\/manager\/roles/,
+    },
+    {
+        to: "./statistical",
+        icon: faChartBar,
+        label: "Thống kê",
+        checker: /\/manager\/statistical/,
     },
 ]
 export default function ManagerNavigator() {

@@ -18,7 +18,7 @@ export default function Package(props: TPackageProps) {
     const colorRef = useRef<HTMLInputElement>(null)
     const [color, setColor] = useState(props.data.color)
     const [name, setName] = useState(props.data.name)
-    const time = moment(props.data.at).format("DD MMM YYYY hh:mm:ss a")
+    const time = moment(props.data.at).format("DD/MM/YYYY hh:mm:ss a")
 
     const [edit, setEdit] = useState(false)
     // drag and drop file and folter

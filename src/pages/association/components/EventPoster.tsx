@@ -1,31 +1,36 @@
 import clsx from "clsx"
+import moment from "moment"
 import React from "react"
 import { Link } from "react-router-dom"
+import ResourceImage from "../../../components/image/ResourceImage"
+import TEvent from "../../../types/TEvent"
 
-export default function EventPoster() {
+type TEventPosterProps = {
+    data: TEvent
+}
+
+export default function EventPoster(props: TEventPosterProps) {
+    const banner = props.data.banner
+    const name = props.data.name
+    const introduce = props.data.introduce
+    const date = moment(+props.data.at).format("DD/MM/YYYY")
     return (
         <div className="group h-[30em] overflow-hidden">
-            <div className={clsx(["w-full h-full rounded-md overflow-hidden", "grid grid-row-[auto_1fr]", "bg-white"])}>
-                <div className="w-full min-h-full">
-                    <img
-                        className=""
-                        src="https://cdn.pixabay.com/photo/2020/01/25/18/48/abstract-4793146__480.jpg"
-                        alt=""
-                    />
+            <div className={clsx(["w-full h-full rounded-md overflow-hidden", "flex flex-col", "bg-white"])}>
+                <div className="w-full overflow-hidden" style={{ aspectRatio: "2/1" }}>
+                    <ResourceImage _id={banner} />
                 </div>
-                <div className={clsx(["-mt-5", "mx-auto justify-center"])}>
+                <div className={clsx(["mx-auto justify-center p-2"])}>
                     <button className={clsx(["bg-secondary ", "py-2 px-5  rounded-sm", "text-white font-semibold"])}>
                         Đăng ký ngay
                     </button>
                 </div>
 
-                <div className={clsx(["flex flex-col p-2 overflow-hidden"])}>
-                    <p className="text-third font-bold"> 10/9/2022</p>
-                    <h2 className="font-bold text-xl text-secondary uppercase">Trung thu cho em 2020</h2>
-                    <div className="flex-1 p-2 text-md overflow-auto hide-scrollbar">
-                        Vì trung thu là tết thiếu nhi nên chi hội chúng ta có tổ chức chương trình " Trung thu cho em"
-                        để dành cho các em nhỏ những khoảnh khắc vui vẻ vào dịp Tết trung thu này nhé
-                    </div>
+                <div className={clsx(["flex flex-1 flex-col p-2 overflow-hidden"])}>
+                    <p className="text-third font-bold"> {date}</p>
+                    <h2 className="font-bold text-xl text-secondary uppercase">{name}</h2>
+                    <div className="flex-1 p-2 text-md overflow-auto hide-scrollbar ">{introduce} </div>
+
                     <Link to="./123" className=" text-sm text-dark text-center group-hover:scale-105 p-2 button">
                         Xem chi tiết
                     </Link>

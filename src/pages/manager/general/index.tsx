@@ -63,6 +63,7 @@ export default function ManagerGeneralPage() {
                         <div className="p-2 font-semibold">Tên đơn vị:</div>
                         <div className="px-5">
                             <Input
+                                rounded
                                 value={data.name}
                                 leftIcon={faArrowAltCircleRight}
                                 onChange={(e) => setData({ ...data, name: e.target.value })}
@@ -73,6 +74,7 @@ export default function ManagerGeneralPage() {
                         <div className="p-2 font-semibold">Uri:</div>
                         <div className="px-5">
                             <Input
+                                rounded
                                 value={`${data.uri}`}
                                 className="text-sm"
                                 leftIcon={faTag}
@@ -80,7 +82,7 @@ export default function ManagerGeneralPage() {
                             />
                         </div>
                     </div>
-                    <div className="w-3/4">
+                    <div className="w-full">
                         <div className="p-2 font-semibold">Giới thiệu</div>
                         <div className="px-5">
                             <TextareaResizable
@@ -97,6 +99,7 @@ export default function ManagerGeneralPage() {
                     <div className="p-5">
                         <div className="p-2 text-facebook">
                             <Input
+                                rounded
                                 value={data.social?.facebook}
                                 leftIcon={faFacebook as any}
                                 onChangeText={(facebook) =>
@@ -106,6 +109,7 @@ export default function ManagerGeneralPage() {
                         </div>
                         <div className="p-2 text-twitter">
                             <Input
+                                rounded
                                 value={data.social?.twitter}
                                 leftIcon={faTwitter as any}
                                 onChangeText={(twitter) =>
@@ -115,6 +119,7 @@ export default function ManagerGeneralPage() {
                         </div>
                         <div className="p-2 text-google">
                             <Input
+                                rounded
                                 value={data.social?.youtube}
                                 leftIcon={faYoutube as any}
                                 onChangeText={(youtube) =>
@@ -124,6 +129,7 @@ export default function ManagerGeneralPage() {
                         </div>
                         <div className="p-2 text-tiktok">
                             <Input
+                                rounded
                                 value={data.social?.tiktok}
                                 leftIcon={faTiktok as any}
                                 onChangeText={(tiktok) =>

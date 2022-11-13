@@ -1,9 +1,11 @@
 import { faBell, faQuestionCircle, faUser } from "@fortawesome/free-regular-svg-icons"
 import {
     faArrowCircleDown,
+    faArrowTurnUp,
     faBars,
     faBarsProgress,
     faChevronCircleDown,
+    faChevronCircleUp,
     faClose,
     faGear,
     faPersonRifle,
@@ -44,19 +46,21 @@ export default function OptionBar() {
     return (
         <div
             className={clsx([
+                "h-full",
                 "group",
-                "fixed z-10 right-1",
-                "-top-2 pt-2",
-                "shadow-md",
-                "bg-white rounded-md overflow-hidden",
-                "flex flex-col justify-start",
+                // "fixed z-10 right-1",
+                // "-top-2 pt-2",
+                // "shadow-md",
+                // "bg-white rounded-md overflow-hidden",
+                "flex flex-col",
+                "py-5",
             ])}
         >
             <ul
                 className={clsx([
-                    "duration-500 opacity-80 h-0",
-                    "group-hover:opacity-100  group-hover:h-80 group-hover:py-5",
-                    "overflow-hidden",
+                    // "duration-500 opacity-80 h-0",
+                    // "group-hover:opacity-100  group-hover:h-80 group-hover:py-5",
+                    // "overflow-hidden",
                     "flex flex-col items-center",
                     "gap-5",
                 ])}
@@ -73,10 +77,6 @@ export default function OptionBar() {
                         </li>
 
                         <li className="button">
-                            <FontAwesomeIcon className="text-lg text-dark" icon={faGear} />
-                        </li>
-
-                        <li className="button">
                             <Badge badgeContent={1} color="info">
                                 <FontAwesomeIcon className="text-lg text-dark" icon={faBell} />
                             </Badge>
@@ -84,6 +84,9 @@ export default function OptionBar() {
 
                         <li onClick={handleLogout} className="button">
                             <FontAwesomeIcon className="text-lg text-dark" icon={faSignOutAlt} />
+                        </li>
+                        <li className="button">
+                            <FontAwesomeIcon className="text-lg text-dark" icon={faGear} />
                         </li>
                     </>
                 ) : (
@@ -98,14 +101,14 @@ export default function OptionBar() {
                 </li>
             </ul>
             <div className={clsx(["w-14 h-14", " rounded-full overflow-hidden", "flex items-center justify-center"])}>
-                <FontAwesomeIcon
+                {/* <FontAwesomeIcon
                     className="overflow-hidden text-xl text-primary group-hover:h-0 duration-500"
                     icon={faBarsProgress}
                 />
                 <FontAwesomeIcon
                     className="overflow-hidden text-xl text-primary h-0 group-hover:h-[1em] duration-500"
-                    icon={faClose}
-                />
+                    icon={faChevronCircleUp}
+                /> */}
             </div>
         </div>
     )

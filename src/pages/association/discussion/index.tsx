@@ -49,7 +49,7 @@ export default function AssociationDiscussionPage() {
                 <section className="p-2">
                     <h4 className="font-bold">Search</h4>
                     <div className="">
-                        <Input placeholder="Search" />
+                        <Input rounded placeholder="Search" />
                     </div>
                 </section>
             </div>

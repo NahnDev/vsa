@@ -47,8 +47,6 @@ export default function FileColumn(props: TFileColumnProps) {
         loadFiles()
     }, [props.package])
 
-    console.log({ groups })
-
     if (!props.package) return <div className="bg-lightest flex-[5] flex flex-col" />
     return (
         <div className="bg-lightest flex-[5] flex flex-col">
@@ -80,7 +78,15 @@ export default function FileColumn(props: TFileColumnProps) {
                 ))}
             </div>
             <div className="hidden">
-                <input type="file" multiple ref={inputRef} onChange={(e) => onDrop(Array.from(e.target.files || []))} />
+                <input
+                    type="file"
+                    multiple
+                    ref={inputRef}
+                    onChange={(e) => {
+                        onDrop(Array.from(e.target.files || []))
+                        e.target.value = ""
+                    }}
+                />
                 <input {...getInputProps()} />
             </div>
         </div>
@@ -98,7 +104,7 @@ function GroupFile(props: { files: TResource[]; selected?: boolean }) {
                 <FontAwesomeIcon onClick={() => setExpand(!expand)} className="button text-darkless" icon={faHistory} />
             </div>
             <div className={clsx([" ml-5 border-l-2 border-third", expand ? "" : "hidden"])}>
-                {props.files.map((file) => (
+                {props.files.slice(1).map((file) => (
                     <File data={file} key={file._id} />
                 ))}
             </div>

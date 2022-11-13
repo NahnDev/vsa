@@ -18,7 +18,7 @@ export default function ForgetPage() {
                     <div className="flex justify-center items-center">
                         <h6 className="text-dark">Chúng tôi sẽ gửi liên kết để bạn đặt lại mật khẩu của bạn.</h6>
                     </div>
-                    <Input placeholder="Email@domain.com" name="email" type="email" />
+                    <Input rounded placeholder="Email@domain.com" name="email" type="email" />
                     <button className={clsx(["bg-success p-2 mx-10", "rounded-full", "text-white font-bold"])}>
                         Send
                     </button>

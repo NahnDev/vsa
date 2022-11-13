@@ -17,7 +17,7 @@ export default function AutoSaveButton(props: { loading: boolean; onClick: () =>
                 onClick={props.onClick}
             >
                 <FontAwesomeIcon className={props.loading ? "animate-spin" : ""} icon={faRotate} />
-                <span>Auto save</span>
+                {props.loading ? <span>Đang lưu</span> : <span>Đã lưu</span>}
             </button>
         </div>
     )

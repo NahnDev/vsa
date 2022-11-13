@@ -7,11 +7,20 @@ export type TInputProps = {
     leftIcon?: FontAwesomeIconProps["icon"]
     onChangeText?: (t: string) => any
     inputClassName?: string
+    rounded?: boolean
 } & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
 export default function Input(props: TInputProps) {
     return (
-        <div className={clsx(["flex flex-row items-center ", "rounded-full p-2 ", "bg-lightest", props.className])}>
+        <div
+            className={clsx([
+                "flex flex-row items-center ",
+                " p-2 rounded-sm",
+                "bg-lightest",
+                props.rounded && "rounded-full",
+                props.className,
+            ])}
+        >
             {props.leftIcon && <FontAwesomeIcon className="p-2" icon={props.leftIcon}></FontAwesomeIcon>}
             <input
                 {...props}

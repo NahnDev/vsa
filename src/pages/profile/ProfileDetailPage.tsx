@@ -45,6 +45,8 @@ export default function ProfileDetailPage() {
     }, [debounced])
 
     if (!user) return <></>
+    console.log(user._id)
+
     return (
         <div className="w-full min-h-screen p-5 bg-lighter  overflow-hidden">
             <div className={clsx(["bg-white rounded-md overflow-hidden", "flex flex-row"])}>
@@ -66,7 +68,9 @@ export default function ProfileDetailPage() {
                     </div>
                     <div className="p-5 flex flex-col items-center justify-center">
                         <h4 className="font-semibold text-lg text-dark text-center">{user.name}</h4>
+
                         <Input
+                            rounded
                             readOnly={!edit}
                             placeholder="Tên đầy đủ của bạn"
                             value={dto.fullName ?? user.fullName}
@@ -106,6 +110,7 @@ export default function ProfileDetailPage() {
                                     <li className="flex flex-row gap-2 items-center">
                                         <FontAwesomeIcon icon={faPhone} />
                                         <Input
+                                            rounded
                                             readOnly={!edit}
                                             placeholder="Số điện thoại của bạn"
                                             className="!bg-[transparent] -mx-4"

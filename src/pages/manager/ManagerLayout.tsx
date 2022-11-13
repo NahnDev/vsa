@@ -4,11 +4,11 @@ import ManagerNavigator from "./ManagerNavigator"
 
 export default function ManagerLayout(props: PropsWithChildren<{}>) {
     return (
-        <div className={clsx(["grid grid-cols-[auto_1fr]", "w-screen h-screen", "bg-lighter"])}>
+        <div className={clsx(["h-full w-full grid grid-cols-[auto_1fr]", "bg-lighter"])}>
             <div className="p-5">
                 <ManagerNavigator />
             </div>
-            <div className="h-full overflow-hidden">{props.children}</div>
+            <div className="h-full overflow-y-auto">{props.children}</div>
         </div>
     )
 }

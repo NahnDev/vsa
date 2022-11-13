@@ -13,7 +13,7 @@ type TEventCardProps = {
 export default function EventCard(props: TEventCardProps) {
     const _id = props.data._id
     const name = props.data.name
-    const time = moment(+props.data.at).format("DD MMM YYYY hh:mm a")
+    const time = moment(+props.data.at).format("DD/MM/YYYY hh:mm a")
 
     return (
         <div className="px-2 border-l-4 border-primary">

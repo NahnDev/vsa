@@ -5,10 +5,10 @@ import AssociationNavigator from "./AssociationNavigator"
 export default function AssociationLayout(props: PropsWithChildren<{}>) {
     return (
         <div className={clsx(["w-full h-screen", "grid grid-cols-[auto_1fr]", "overflow-hidden", " bg-lighter"])}>
-            <div className="p-5">
+            <div className="p-5 ">
                 <AssociationNavigator />
             </div>
-            <div className="p-5 pl-0 overflow-auto">{props.children}</div>
+            <div className="p-5 pl-0 overflow-y-scroll">{props.children}</div>
         </div>
     )
 }

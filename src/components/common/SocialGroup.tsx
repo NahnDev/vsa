@@ -21,6 +21,7 @@ export default function SocialGroup(props: TSocialGroupProps) {
                 </a>
                 {props.edit && (
                     <Input
+                        rounded
                         value={props.value?.facebook || ""}
                         onChangeText={(facebook) => props.onChange && props.onChange({ ...props.value, facebook })}
                         className="!bg-lighter !py-1 font-normal text-sm flex-1"
@@ -33,6 +34,7 @@ export default function SocialGroup(props: TSocialGroupProps) {
                 </a>
                 {props.edit && (
                     <Input
+                        rounded
                         value={props.value?.tiktok || ""}
                         onChangeText={(tiktok) => props.onChange && props.onChange({ ...props.value, tiktok })}
                         className="!bg-lighter !py-1 font-normal text-sm flex-1"
@@ -45,6 +47,7 @@ export default function SocialGroup(props: TSocialGroupProps) {
                 </a>
                 {props.edit && (
                     <Input
+                        rounded
                         value={props.value?.twitter || ""}
                         onChangeText={(twitter) => props.onChange && props.onChange({ ...props.value, twitter })}
                         className="!bg-lighter !py-1 font-normal text-sm flex-1"
@@ -57,6 +60,7 @@ export default function SocialGroup(props: TSocialGroupProps) {
                 </a>
                 {props.edit && (
                     <Input
+                        rounded
                         value={props.value?.youtube || ""}
                         onChangeText={(youtube) => props.onChange && props.onChange({ ...props.value, youtube })}
                         className="!bg-lighter !py-1 font-normal text-sm flex-1"

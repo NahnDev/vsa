@@ -15,7 +15,7 @@ type TPostHeaderProps = {
 export default function PostHeader(props: TPostHeaderProps) {
     // const name = props.data.sender.name
     // const avatar = props.data.sender.avatar
-    const time = moment(props.data.at).format("HH:SS DD MMM YYYY")
+    const time = moment(props.data.at).format("HH:SS DD/MM/YYYY")
     const hasAuthor = !!props.data.sender
     return (
         <div className="flex flex-row gap-2 items-center p-2">
