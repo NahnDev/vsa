@@ -10,6 +10,7 @@ type TEventPosterProps = {
 }
 
 export default function EventPoster(props: TEventPosterProps) {
+    const eId = props.data._id
     const banner = props.data.banner
     const name = props.data.name
     const introduce = props.data.introduce
@@ -20,7 +21,7 @@ export default function EventPoster(props: TEventPosterProps) {
                 <div className="w-full overflow-hidden" style={{ aspectRatio: "2/1" }}>
                     <ResourceImage _id={banner} />
                 </div>
-                <div className={clsx(["mx-auto justify-center p-2"])}>
+                <div className={clsx(["-mt-5 mx-auto justify-center p-2"])}>
                     <button className={clsx(["bg-secondary ", "py-2 px-5  rounded-sm", "text-white font-semibold"])}>
                         Đăng ký ngay
                     </button>
@@ -31,7 +32,7 @@ export default function EventPoster(props: TEventPosterProps) {
                     <h2 className="font-bold text-xl text-secondary uppercase">{name}</h2>
                     <div className="flex-1 p-2 text-md overflow-auto hide-scrollbar ">{introduce} </div>
 
-                    <Link to="./123" className=" text-sm text-dark text-center group-hover:scale-105 p-2 button">
+                    <Link to={`./${eId}`} className=" text-sm text-dark text-center group-hover:scale-105 p-2 button">
                         Xem chi tiết
                     </Link>
                 </div>

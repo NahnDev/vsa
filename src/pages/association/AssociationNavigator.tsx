@@ -17,6 +17,7 @@ import clsx from "clsx"
 import React, { useEffect, useState } from "react"
 import { Link, LinkProps, RouteProps, useLocation, useParams, useRoutes } from "react-router-dom"
 import NavLink, { TNavLinkProps } from "../../components/common/NavLink"
+import ResourceImage from "../../components/image/ResourceImage"
 import Image from "../../components/image/ResourceImage"
 import AssociationApi from "../../stores/api/AssociationApi"
 import TAssociation from "../../types/TAssociation"
@@ -66,9 +67,9 @@ export default function AssociationNavigator() {
     return (
         <div className="h-full w-[300px]">
             <div className={clsx(["shadow-md h-full", "rounded-md", "p-5 bg-white", "flex flex-col"])}>
-                <div className="pb-4">
-                    <div className={clsx(["h-40 overflow-hidden", " flex justify-center items-center"])}>
-                        <Image _id={data?.logo} className="h-full" alt="" />
+                <div className="p-2">
+                    <div className={clsx(["p-5 h-40 overflow-hidden", " flex justify-center items-center"])}>
+                        <ResourceImage _id={data?.logo} className="h-full rounded-full" alt="" />
                     </div>
                     <div>
                         <h6 className="text-xs uppercase text-dark">@{data?.uri}</h6>

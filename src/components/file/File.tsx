@@ -10,6 +10,8 @@ export type TFileProps = {
     data: TFile
     selected?: boolean
     onClick?: () => any
+    onSelect?: () => any
+    onUnselect?: () => any
 }
 export default function File(props: TFileProps) {
     const name = props.data.name
@@ -21,9 +23,9 @@ export default function File(props: TFileProps) {
             <div className="grid grid-cols-[auto_auto_1fr_auto_auto] w-full items-center gap-5 bg-white p-2">
                 <div className="">
                     {props.selected ? (
-                        <FontAwesomeIcon icon={faCheckCircle} className="text-success" />
+                        <FontAwesomeIcon icon={faCheckCircle} className="text-success" onClick={props.onUnselect} />
                     ) : (
-                        <FontAwesomeIcon icon={faCircle} className="text-gray" />
+                        <FontAwesomeIcon icon={faCircle} className="text-gray" onClick={props.onSelect} />
                     )}
                 </div>
                 <div className="w-5 h-5">

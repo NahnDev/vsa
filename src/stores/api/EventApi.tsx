@@ -1,4 +1,5 @@
 import TEvent, { TUpdateEventDto } from "../../types/TEvent"
+import TVolunteer from "../../types/TVolunteer"
 import axiosClient from "./axios"
 
 export default class EventApi {
@@ -19,5 +20,9 @@ export default class EventApi {
     }
     static async remove(id: string) {
         return await axiosClient.delete<any>(`events/${id}`)
+    }
+
+    static async join(id: string) {
+        return await axiosClient.post<any, TVolunteer>(`events/${id}/join`)
     }
 }

@@ -13,6 +13,7 @@ import File from "./File"
 type TFileColumnProps = { package?: TPackage }
 export default function FileColumn(props: TFileColumnProps) {
     const inputRef = useRef<HTMLInputElement>(null)
+    const [selected, setSelected] = useState<Set<string>>(new Set())
     const [groups, setGroups] = useState<TFile[][]>([])
 
     const uploadFile = async (file: any) => {
@@ -34,6 +35,14 @@ export default function FileColumn(props: TFileColumnProps) {
         [props.package, uploadFile]
     )
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+
+    const handleRemove = async () => {
+        for (const id of Array.from(selected)) {
+            await ResourceApi.remove(id)
+        }
+        await loadFiles()
+        setSelected(new Set())
+    }
 
     const loadFiles = async () => {
         if (!props.package) return
@@ -57,7 +66,9 @@ export default function FileColumn(props: TFileColumnProps) {
                     <div className="button" onClick={() => inputRef.current?.click()}>
                         <FontAwesomeIcon className="text-success" icon={faUpload} />
                     </div>
-                    <FontAwesomeIcon className="text-error" icon={faTrash} />
+                    <div className="button" onClick={handleRemove}>
+                        <FontAwesomeIcon className="text-error" icon={faTrash} />
+                    </div>
                 </div>
             </div>
             <div className="p-2 flex-1  relative flex flex-col gap-2" {...getRootProps()} onClick={() => {}}>
@@ -74,7 +85,21 @@ export default function FileColumn(props: TFileColumnProps) {
                 </div>
 
                 {groups.map((files, index) => (
-                    <GroupFile files={files} key={index} />
+                    <GroupFile
+                        selected={selected}
+                        onSelect={(ids) => {
+                            const s = new Set(selected)
+                            for (const id of ids) s.add(id)
+                            setSelected(s)
+                        }}
+                        onUnselect={(ids) => {
+                            const s = new Set(selected)
+                            for (const id of ids) s.delete(id)
+                            setSelected(s)
+                        }}
+                        files={files}
+                        key={index}
+                    />
                 ))}
             </div>
             <div className="hidden">
@@ -93,19 +118,40 @@ export default function FileColumn(props: TFileColumnProps) {
     )
 }
 
-function GroupFile(props: { files: TResource[]; selected?: boolean }) {
+function GroupFile(props: {
+    files: TResource[]
+    selected?: Set<string>
+    onSelect: (ids: string[]) => any
+    onUnselect: (ids: string[]) => any
+}) {
     const [expand, setExpand] = useState(false)
+    const all = props.files.every((file) => props.selected?.has(file._id))
     return (
         <div>
             <div className="flex flex-row bg-white items-center justify-center gap-2 p-2">
                 <div className="flex-1">
-                    <File data={props.files[0]} />
+                    <File
+                        data={props.files[0]}
+                        selected={all}
+                        onSelect={() => {
+                            props.onSelect(props.files.map((file) => file._id))
+                        }}
+                        onUnselect={() => {
+                            props.onUnselect(props.files.map((file) => file._id))
+                        }}
+                    />
                 </div>
                 <FontAwesomeIcon onClick={() => setExpand(!expand)} className="button text-darkless" icon={faHistory} />
             </div>
             <div className={clsx([" ml-5 border-l-2 border-third", expand ? "" : "hidden"])}>
-                {props.files.slice(1).map((file) => (
-                    <File data={file} key={file._id} />
+                {props.files.map((file) => (
+                    <File
+                        data={file}
+                        key={file._id}
+                        selected={props.selected?.has(file._id)}
+                        onSelect={() => props.onSelect([file._id])}
+                        onUnselect={() => props.onUnselect([file._id])}
+                    />
                 ))}
             </div>
         </div>

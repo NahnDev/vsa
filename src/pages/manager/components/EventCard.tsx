@@ -17,8 +17,8 @@ export default function EventCard(props: TEventCardProps) {
 
     return (
         <div className="px-2 border-l-4 border-primary">
-            <div className="bg-lightest p-2 px-5 rounded-md ">
-                <div className="flex flex-row gap-20 justify-between items-center">
+            <div className="bg-lightest p-2  rounded-md ">
+                <div className="flex flex-row gap-2 justify-between items-center">
                     <div className="flex-1">
                         <h6 className="font-bold text-darker">{name}</h6>
                         <span className="text-sm text-dark">{time}</span>
@@ -26,7 +26,7 @@ export default function EventCard(props: TEventCardProps) {
                     <div>
                         <EventStatusSelector data={props.data} onChange={() => {}} />
                     </div>
-                    <Link to={`./${_id}`} className="button">
+                    <Link to={`./${_id}`} className="button px-5">
                         <FontAwesomeIcon className="text-third" icon={faArrowRight} />
                     </Link>
                 </div>
@@ -39,9 +39,9 @@ function EventStatusSelector(props: { data: TEvent; onChange: (s: EEventStatus) 
     const status = props.data.status
     const description = StatusDescriptions[status]
     return (
-        <div className="p-5 flex flex-row items-center justify-end">
+        <div className="p-2 flex flex-col items-center justify-end">
             {status === EEventStatus.PRIVATE && (
-                <div className="p-2 flex flex-row gap-5 items-center">
+                <div className="p-2 flex flex-col  items-center justify-center">
                     <div>
                         <span className="text-sm italic text-dark">Sự kiện {description}</span>
                     </div>
@@ -54,7 +54,7 @@ function EventStatusSelector(props: { data: TEvent; onChange: (s: EEventStatus) 
                 </div>
             )}
             {status === EEventStatus.PUBLIC && (
-                <div className="p-2 flex flex-row gap-5 items-center">
+                <div className="p-2 flex flex-col items-center justify-center">
                     <div>
                         <span className="text-sm italic text-dark">Sự kiện {description}</span>
                     </div>
@@ -67,7 +67,7 @@ function EventStatusSelector(props: { data: TEvent; onChange: (s: EEventStatus) 
                 </div>
             )}
             {status === EEventStatus.BLOCK && (
-                <div className="p-2 flex flex-row gap-5 items-center">
+                <div className="p-2 flex flex-col  items-center justify-center">
                     <div>
                         <span className="text-sm italic text-dark">Sự kiện {description}</span>
                     </div>

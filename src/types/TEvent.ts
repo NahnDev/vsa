@@ -9,7 +9,8 @@ type TEvent = {
     at: number
     banner: string
     introduce: string
+    content: string
     status: EEventStatus
 }
-export type TUpdateEventDto = Partial<Pick<TEvent, "name" | "introduce" | "banner" | "status">>
+export type TUpdateEventDto = Partial<Pick<TEvent, "name" | "introduce" | "banner" | "status" | "content">>
 export default TEvent

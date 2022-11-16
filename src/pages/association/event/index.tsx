@@ -6,7 +6,7 @@ export default function AssociationEventPage() {
     return (
         <Routes>
             <Route path="/" element={<EventMainPage />}></Route>
-            <Route path="/:id" element={<EventDetailPage />}></Route>
+            <Route path="/:eId" element={<EventDetailPage />}></Route>
         </Routes>
     )
 }

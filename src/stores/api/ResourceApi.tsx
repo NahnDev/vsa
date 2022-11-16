@@ -16,4 +16,7 @@ export default class ResourceApi {
         }
         return await axiosClient.post<any, TResource>("/resources/", formData, config)
     }
+    static async remove(id: string) {
+        return await axiosClient.delete<any, TResource>(`/resources/${id}`)
+    }
 }

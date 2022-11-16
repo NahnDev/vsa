@@ -2,7 +2,13 @@ import { FontAwesomeIconProps, FontAwesomeIcon } from "@fortawesome/react-fontaw
 import clsx from "clsx"
 import { useLocation, Link } from "react-router-dom"
 
-export type TNavLinkProps = { to: string; label: string; icon: FontAwesomeIconProps["icon"]; checker: RegExp }
+export type TNavLinkProps = {
+    to: string
+    label: string
+    icon: FontAwesomeIconProps["icon"]
+    checker: RegExp
+    className?: string
+}
 
 export default function NavLink(props: TNavLinkProps) {
     const pathname = useLocation().pathname
@@ -11,11 +17,12 @@ export default function NavLink(props: TNavLinkProps) {
     return (
         <li
             className={clsx([
-                "flex items-center p-1",
+                "flex flex-row items-center p-1",
                 "cursor-pointer select-none",
                 "text-dark ",
-                "hover:pl-4   duration-200",
+                "hover:pl-4   duration-200 ",
                 active && "text-secondary border-l-2 border-secondary pl-4",
+                props.className,
             ])}
         >
             <Link to={props.to} className="flex-1">

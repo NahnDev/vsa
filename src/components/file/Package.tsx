@@ -13,6 +13,8 @@ export type TPackageProps = {
     data: TPackage
     selected?: boolean
     onClick?: () => any
+    onSelect?: () => any
+    onUnselect?: () => any
 }
 export default function Package(props: TPackageProps) {
     const colorRef = useRef<HTMLInputElement>(null)
@@ -91,9 +93,13 @@ export default function Package(props: TPackageProps) {
                         </div>
                         <div className="">
                             {props.selected ? (
-                                <FontAwesomeIcon icon={faCheckCircle} className="text-success" />
+                                <FontAwesomeIcon
+                                    icon={faCheckCircle}
+                                    className="text-success"
+                                    onClick={props.onUnselect}
+                                />
                             ) : (
-                                <FontAwesomeIcon icon={faCircle} className="text-gray" />
+                                <FontAwesomeIcon icon={faCircle} className="text-gray" onClick={props.onSelect} />
                             )}
                         </div>
                     </div>

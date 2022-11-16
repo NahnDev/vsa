@@ -7,7 +7,7 @@ export default class PackageApi {
         return await axiosClient.post<any, TPackage>("packages/", dto)
     }
 
-    static async findAll(filter: { association: string }) {
+    static async findAll(filter: { association?: string; event?: string }) {
         return await axiosClient.get<any, TPackage[]>("packages/", { params: filter })
     }
 
