@@ -206,6 +206,7 @@ function ImagePicker(props: { className?: string } & Pick<TImageUploaderProps, "
                 "flex bg-light bg-opacity-20 justify-center items-center cursor-pointer",
                 props.className,
             ])}
+            style={{ aspectRatio: 2 }}
         />
     )
 }

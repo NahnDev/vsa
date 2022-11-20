@@ -1,7 +1,7 @@
 import { faUpload } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import clsx from "clsx"
-import React, { PropsWithChildren, useEffect, useRef, useState } from "react"
+import React, { CSSProperties, PropsWithChildren, useEffect, useRef, useState } from "react"
 import ResourceApi from "../../stores/api/ResourceApi"
 import TResource from "../../types/TResource"
 import ResourceImage from "./ResourceImage"
@@ -9,6 +9,7 @@ import ResourceImage from "./ResourceImage"
 export type TImageUploaderProps = {
     label?: string
     className?: string
+    style?: CSSProperties
     disable?: boolean
     default?: TResource["_id"]
     onCompleted?: (data: TResource) => any
@@ -49,7 +50,12 @@ export default function ImageUploader(props: PropsWithChildren<TImageUploaderPro
     return (
         <div
             onClick={() => inpRef.current?.click()}
-            className={clsx(["flex flex-1", props.disable ? "pointer-events-none" : "", props.className])}
+            className={clsx([
+                "flex flex-1 overflow-hidden",
+                props.disable ? "pointer-events-none" : "",
+                props.className,
+            ])}
+            style={props.style}
         >
             <div className="hidden">
                 <input

@@ -33,6 +33,7 @@ export default function OptionBar() {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const { avatar, _id: uId } = useUser()
+
     const logged = !!uId
 
     const handleLogin = () => {
@@ -56,15 +57,7 @@ export default function OptionBar() {
                 "py-5",
             ])}
         >
-            <ul
-                className={clsx([
-                    // "duration-500 opacity-80 h-0",
-                    // "group-hover:opacity-100  group-hover:h-80 group-hover:py-5",
-                    // "overflow-hidden",
-                    "flex flex-col items-center",
-                    "gap-5",
-                ])}
-            >
+            <ul className={clsx(["flex flex-col items-center", "gap-5"])}>
                 {logged ? (
                     <>
                         <li>

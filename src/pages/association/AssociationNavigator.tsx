@@ -34,25 +34,25 @@ const LINKS: TNavLinkProps[] = [
         to: "./discussion",
         icon: faNoteSticky,
         label: "Thảo luận",
-        checker: /\/discussion$/,
+        checker: /\/discussion/,
     },
     {
         to: "./events",
         icon: faNoteSticky,
         label: "Sự kiện, hoạt động",
-        checker: /\/events$/,
+        checker: /\/events/,
     },
-    {
-        to: "./picture",
-        icon: faImage,
-        label: "Hình ảnh, tài nguyên",
-        checker: /\/picture$/,
-    },
+    // {
+    //     to: "./picture",
+    //     icon: faImage,
+    //     label: "Hình ảnh, tài nguyên",
+    //     checker: /\/picture$/,
+    // },
     {
         to: "./members",
         icon: faUsers,
         label: "Thành viên",
-        checker: /\/members$/,
+        checker: /\/members/,
     },
 ]
 export default function AssociationNavigator() {

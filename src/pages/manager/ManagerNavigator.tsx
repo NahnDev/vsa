@@ -1,5 +1,5 @@
 import { faFacebook, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons"
-import { faChartBar, faNoteSticky } from "@fortawesome/free-regular-svg-icons"
+import { faChartBar, faCheckCircle, faNoteSticky } from "@fortawesome/free-regular-svg-icons"
 import {
     faArrowLeft,
     faBackspace,
@@ -65,10 +65,16 @@ const LINKS: TNavLinkProps[] = [
         checker: /\/manager\/roles/,
     },
     {
-        to: "./statistical",
+        to: "./finance",
         icon: faChartBar,
-        label: "Thống kê",
-        checker: /\/manager\/statistical/,
+        label: "Kinh phí",
+        checker: /\/manager\/finance/,
+    },
+    {
+        to: "./approval",
+        icon: faCheckCircle,
+        label: "Phê duyệt",
+        checker: /\/manager\/approval/,
     },
 ]
 export default function ManagerNavigator() {
