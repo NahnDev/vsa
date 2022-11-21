@@ -8,6 +8,7 @@ import {
     faChevronCircleUp,
     faClose,
     faGear,
+    faHomeAlt,
     faPersonRifle,
     faQuestion,
     faRing,
@@ -60,6 +61,11 @@ export default function OptionBar() {
             <ul className={clsx(["flex flex-col items-center", "gap-5"])}>
                 {logged ? (
                     <>
+                        <li>
+                            <Link className="button " to="/">
+                                <FontAwesomeIcon className="text-lg text-darker" icon={faHomeAlt} />
+                            </Link>
+                        </li>
                         <li>
                             <Link to="/profiles/me" className="w-full h-full flex items-center justify-center button">
                                 <ResourceImage

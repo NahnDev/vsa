@@ -8,6 +8,7 @@ import ResourceImage from "../image/ResourceImage"
 type TUserThumbnailProps = {
     _id: string
     name?: boolean
+    sub?: string
 }
 
 export default function UserThumbnail(props: TUserThumbnailProps) {
@@ -28,8 +29,10 @@ export default function UserThumbnail(props: TUserThumbnailProps) {
     return (
         <Link to={`/profiles/${data._id}`} className="flex flex-row gap-2 justify-center items-center">
             <ResourceImage _id={data.avatar} alt="" className="w-10 h-10 rounded-full border-2 border-light" />
-            <div>{props.name !== false && <div className="font-semibold ">{data.name}</div>}</div>
-            <div className="flex-1"></div>
+            <div className="">
+                <div>{props.name !== false && <div className="font-semibold ">{data.name}</div>}</div>
+                {props.sub && <div className="flex-1 text-xs text-gray">{props.sub}</div>}
+            </div>
         </Link>
     )
 }

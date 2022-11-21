@@ -13,14 +13,17 @@ type TPostActionProps = {
 export default function PostActions(props: TPostActionProps) {
     const { _id: uId } = useUser()
     const pId = props.data._id
+    const [count, setCount] = useState(props.data.likes.length)
     const [liked, setLiked] = useState(props.data.likes.some((el) => uId === el))
     const handleLikeClick = async () => {
         if (liked) {
             await PostApi.unlike(pId)
             setLiked(false)
+            setCount(count - 1)
         } else {
             await PostApi.like(pId)
             setLiked(true)
+            setCount(count + 1)
         }
     }
 
@@ -33,7 +36,7 @@ export default function PostActions(props: TPostActionProps) {
                         className={clsx(["button flex flex-1 flex-row items-center gap-2", liked ? "text-error" : ""])}
                     >
                         <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
-                        <span>{props.data.likes.length} Yêu thích</span>
+                        <span>{count} Yêu thích</span>
                     </button>
                 </li>
                 <li>

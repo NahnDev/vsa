@@ -18,7 +18,7 @@ export default function MEventMainPage() {
     }
     const load = async () => {
         try {
-            const data = await EventApi.findAll({ association: aId })
+            const data = await EventApi.findAll({ association: aId, admin: true })
             setEvents(data)
         } catch {}
     }
@@ -36,9 +36,7 @@ export default function MEventMainPage() {
                         <div className="flex flex-row flex-1 justify-between items-center">
                             <div className="flex flex-row p-2">
                                 <div className="flex-1"></div>
-                                <div>
-                                    <Dropdown data={data} onSelected={(value) => {}}></Dropdown>
-                                </div>
+                                <div></div>
                             </div>
 
                             <div className="flex flex-row p-2">

@@ -5,6 +5,7 @@ import MEventMainPage from "./MEventMainPage"
 import MEventUpdatePage from "./MEventManagerPage"
 import MEventPostPage from "./MEventPostPage"
 import MEventResourcePage from "./MEventResourcePage"
+import MEventVolunteerPage from "./MEventVolunteerPage"
 
 export default function MEventRouter() {
     return (
@@ -17,6 +18,7 @@ export default function MEventRouter() {
                         <MEventLayout>
                             <Routes>
                                 <Route path="/*" element={<MEventUpdatePage />} />
+                                <Route path="/volunteers/*" element={<MEventVolunteerPage />} />
                                 <Route path="/posts/*" element={<MEventPostPage />} />
                                 <Route path="/resources/*" element={<MEventResourcePage />} />
                             </Routes>

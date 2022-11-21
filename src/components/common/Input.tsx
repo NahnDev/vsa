@@ -21,7 +21,7 @@ export default function Input(props: TInputProps) {
                 props.className,
             ])}
         >
-            {props.leftIcon && <FontAwesomeIcon className="p-2" icon={props.leftIcon}></FontAwesomeIcon>}
+            {props.leftIcon && <FontAwesomeIcon className="px-2" icon={props.leftIcon}></FontAwesomeIcon>}
             <input
                 {...props}
                 onChange={(e) => {

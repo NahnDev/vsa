@@ -6,6 +6,7 @@ import AssociationRouter from "./pages/association"
 import AuthRouter from "./pages/auth"
 import EventPage from "./pages/event"
 import ProfilePage from "./pages/profile"
+import HomePage from "./pages/home"
 import { useUser } from "./stores/user/hooks"
 
 export default function MainRouter() {
@@ -14,6 +15,7 @@ export default function MainRouter() {
             <BrowserRouter>
                 <AppLayout>
                     <Routes>
+                        <Route path="/*" element={<HomePage />}></Route>
                         <Route path="/auth/*" element={<AuthRouter />}></Route>
                         <Route path="/events/*" element={<EventPage />}></Route>
                         <Route path="/profiles/*" element={<ProfilePage />}></Route>

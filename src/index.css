@@ -34,7 +34,7 @@ code {
 
 @layer components {
   .button {
-    @apply hover:scale-110  duration-200 outline-none ;
+    @apply hover:scale-105  duration-200 outline-none ;
     @apply select-none cursor-pointer;
      
   }

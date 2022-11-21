@@ -1,9 +1,10 @@
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import moment from "moment"
-import React from "react"
+import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import EEventStatus, { StatusDescriptions } from "../../../enums/EEventStatus"
+import EventApi from "../../../stores/api/EventApi"
 import TEvent from "../../../types/TEvent"
 
 type TEventCardProps = {
@@ -24,7 +25,7 @@ export default function EventCard(props: TEventCardProps) {
                         <span className="text-sm text-dark">{time}</span>
                     </div>
                     <div>
-                        <EventStatusSelector data={props.data} onChange={() => {}} />
+                        <EventStatus data={props.data} />
                     </div>
                     <Link to={`./${_id}`} className="button px-5">
                         <FontAwesomeIcon className="text-third" icon={faArrowRight} />
@@ -35,9 +36,20 @@ export default function EventCard(props: TEventCardProps) {
     )
 }
 
-function EventStatusSelector(props: { data: TEvent; onChange: (s: EEventStatus) => any }) {
-    const status = props.data.status
+function EventStatus(props: { data: TEvent }) {
+    const id = props.data._id
+    const [status, setStatus] = useState<EEventStatus>(props.data.status)
     const description = StatusDescriptions[status]
+
+    const handlePublish = async () => {
+        await EventApi.publish(id)
+        setStatus(EEventStatus.PUBLIC)
+    }
+    const handleUnPublish = async () => {
+        await EventApi.unpublish(id)
+        setStatus(EEventStatus.BLOCK)
+    }
+
     return (
         <div className="p-2 flex flex-col items-center justify-end">
             {status === EEventStatus.PRIVATE && (
@@ -46,7 +58,7 @@ function EventStatusSelector(props: { data: TEvent; onChange: (s: EEventStatus) 
                         <span className="text-sm italic text-dark">Sự kiện {description}</span>
                     </div>
                     <button
-                        onChange={() => props.onChange(EEventStatus.PUBLIC)}
+                        onClick={handlePublish}
                         className="button rounded-md p-1 px-5 font-bold bg-success text-white"
                     >
                         Khởi động sự kiện
@@ -59,7 +71,7 @@ function EventStatusSelector(props: { data: TEvent; onChange: (s: EEventStatus) 
                         <span className="text-sm italic text-dark">Sự kiện {description}</span>
                     </div>
                     <button
-                        onChange={() => props.onChange(EEventStatus.BLOCK)}
+                        onClick={handleUnPublish}
                         className="button rounded-md p-1 px-5 font-bold bg-error text-white"
                     >
                         Dừng sự kiện

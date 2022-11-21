@@ -3,6 +3,7 @@ import moment from "moment"
 import React from "react"
 import { Link } from "react-router-dom"
 import ResourceImage from "../../../components/image/ResourceImage"
+import EventApi from "../../../stores/api/EventApi"
 import TEvent from "../../../types/TEvent"
 
 type TEventPosterProps = {
@@ -15,6 +16,7 @@ export default function EventPoster(props: TEventPosterProps) {
     const name = props.data.name
     const introduce = props.data.introduce
     const date = moment(+props.data.at).format("DD/MM/YYYY")
+
     return (
         <div className="group h-[30em] overflow-hidden">
             <div className={clsx(["w-full h-full rounded-md overflow-hidden", "flex flex-col", "bg-white"])}>
@@ -22,9 +24,12 @@ export default function EventPoster(props: TEventPosterProps) {
                     <ResourceImage _id={banner} />
                 </div>
                 <div className={clsx(["-mt-5 mx-auto justify-center p-2"])}>
-                    <button className={clsx(["bg-secondary ", "py-2 px-5  rounded-sm", "text-white font-semibold"])}>
+                    <Link
+                        to={`./${eId}`}
+                        className={clsx(["bg-secondary ", "py-2 px-5  rounded-sm", "text-white font-semibold"])}
+                    >
                         Đăng ký ngay
-                    </button>
+                    </Link>
                 </div>
 
                 <div className={clsx(["flex flex-1 flex-col p-2 overflow-hidden"])}>

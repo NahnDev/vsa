@@ -4,11 +4,11 @@ import TResource from "../../types/TResource"
 import axiosClient from "./axios"
 
 export default class PostApi {
-    static async create(dto: { content: string; association: string; at?: number }) {
+    static async create(dto: { content: string; association: string; at?: number; event?: string }) {
         return await axiosClient.post<any, TPost>("posts/", dto)
     }
 
-    static async findAll(filter: { association: string; wait?: boolean }) {
+    static async findAll(filter: { association: string; admin?: boolean; event?: string }) {
         return await axiosClient.get<any, TPost[]>("posts/", { params: filter })
     }
 
@@ -28,5 +28,8 @@ export default class PostApi {
     }
     static async unlike(id: string) {
         return await axiosClient.delete<any>(`posts/${id}/like`)
+    }
+    static async publish(id: string) {
+        return await axiosClient.post<any>(`posts/${id}/publish`)
     }
 }

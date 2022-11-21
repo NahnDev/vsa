@@ -59,12 +59,6 @@ const LINKS: TNavLinkProps[] = [
         checker: /\/manager\/posts/,
     },
     {
-        to: "./roles",
-        icon: faUserGraduate,
-        label: "Vai trò",
-        checker: /\/manager\/roles/,
-    },
-    {
         to: "./finance",
         icon: faChartBar,
         label: "Kinh phí",

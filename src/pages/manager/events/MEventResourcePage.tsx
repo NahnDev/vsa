@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import FileColumn from "../../../components/file/FileColumn"
+import EventApi from "../../../stores/api/EventApi"
 import PackageApi from "../../../stores/api/PackageApi"
 import TPackage from "../../../types/TPackage"
 
@@ -10,8 +11,9 @@ export default function MEventResourcePage() {
 
     const load = async () => {
         try {
-            const data = await PackageApi.findAll({ event: eId })
-            setPackages(data)
+            const event = await EventApi.findOne(eId)
+            const pack = await PackageApi.findOne(event.package)
+            setPackages([pack])
         } catch {}
     }
     useEffect(() => {

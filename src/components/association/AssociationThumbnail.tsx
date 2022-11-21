@@ -27,8 +27,8 @@ export default function AssociationThumbnail(props: TAssociationThumbnailProps) 
     if (!data) return <></>
 
     return (
-        <Link to={`/profiles/${data._id}`} className="flex flex-row gap-2 justify-center items-center">
-            <ResourceImage _id={data.logo} alt="" className="w-10 h-10 rounded-full border-2 border-primary" />
+        <Link to={`/associations/${data._id}`} className="flex flex-row gap-2 justify-center items-center">
+            <ResourceImage _id={data.logo} alt="" className="w-10 h-10 rounded-full border-2 border-primary " />
             <div>
                 <div className="font-semibold ">{data.name}</div>
             </div>

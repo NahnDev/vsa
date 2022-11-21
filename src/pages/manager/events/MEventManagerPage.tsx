@@ -58,7 +58,7 @@ export default function MEventUpdatePage() {
 
     if (!event) return <div className="">Loading</div>
     return (
-        <div>
+        <div className="bg-white rounded-md p-5">
             <AutoSaveButton loading={loading} onClick={handleSave} />
             <article className="mx-auto w-[40em] ">
                 <div className="p-2 h-[20em] overflow-hidden">
@@ -94,18 +94,6 @@ export default function MEventUpdatePage() {
                         onChange={(value) => setDto({ ...dto, content: value?.toString() || "" })}
                     />
                 </div>
-                <section className="p-2  w-full">
-                    <div className="p-5 flex flex-row gap-5 bg-lightest rounded-md">
-                        <span className="font-bold">4 post</span>
-                        <span className="flex-1"></span>
-                        <div className="button text-third">
-                            <FontAwesomeIcon icon={faPlus} />
-                        </div>
-                        <div className="button text-darker">
-                            <FontAwesomeIcon icon={faChevronCircleRight} />
-                        </div>
-                    </div>
-                </section>
                 <section className="p-2 py-5 flex-1">
                     <h4 className="p-2 font-bold">Lịch trình, kế hoạch sự kiện:</h4>
                     <ScheduleEditor event={eId} />

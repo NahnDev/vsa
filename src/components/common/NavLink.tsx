@@ -19,8 +19,8 @@ export default function NavLink(props: TNavLinkProps) {
             className={clsx([
                 "flex flex-row items-center p-1",
                 "cursor-pointer select-none",
-                "text-dark ",
-                "hover:pl-4   duration-200 ",
+                "text-dark pl-4",
+                " hover:scale-105   duration-200 ",
                 active && "text-secondary border-l-2 border-secondary pl-4",
                 props.className,
             ])}

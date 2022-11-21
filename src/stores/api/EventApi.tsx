@@ -7,7 +7,7 @@ export default class EventApi {
         return await axiosClient.post<any, TEvent>("events/", dto)
     }
 
-    static async findAll(filter: { association: string }) {
+    static async findAll(filter: { association: string; admin?: boolean }) {
         return await axiosClient.get<any, TEvent[]>("events/", { params: filter })
     }
 
@@ -24,5 +24,12 @@ export default class EventApi {
 
     static async join(id: string) {
         return await axiosClient.post<any, TVolunteer>(`events/${id}/join`)
+    }
+
+    static async publish(id: string) {
+        return await axiosClient.patch<any, TVolunteer>(`events/${id}/publish`)
+    }
+    static async unpublish(id: string) {
+        return await axiosClient.patch<any, TVolunteer>(`events/${id}/unpublish`)
     }
 }

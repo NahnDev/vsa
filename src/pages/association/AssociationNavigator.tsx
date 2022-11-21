@@ -20,6 +20,7 @@ import NavLink, { TNavLinkProps } from "../../components/common/NavLink"
 import ResourceImage from "../../components/image/ResourceImage"
 import Image from "../../components/image/ResourceImage"
 import AssociationApi from "../../stores/api/AssociationApi"
+import { useUser } from "../../stores/user/hooks"
 import TAssociation from "../../types/TAssociation"
 import AssociationChat from "./AssociationChat"
 
@@ -57,10 +58,22 @@ const LINKS: TNavLinkProps[] = [
 ]
 export default function AssociationNavigator() {
     const handleBack = () => window.history.back()
-    const { aId } = useParams()
+    const { _id: uId = "" } = useUser()
+    const { aId = "" } = useParams()
     const [data, setData] = useState<TAssociation | undefined>(undefined)
+    const [joined, setJoined] = useState(false)
+
+    const handleJoin = async () => {
+        await AssociationApi.join(aId)
+        setJoined(true)
+    }
+    const handleLeave = () => {}
+    const handleFollow = () => {}
 
     useEffect(() => {
+        AssociationApi.findAllMember(aId).then((members) =>
+            setJoined(members.findIndex((id) => id.user === uId) !== -1)
+        )
         AssociationApi.findOne(aId || "").then(setData)
     }, [aId])
 
@@ -76,30 +89,49 @@ export default function AssociationNavigator() {
                         <h1 className="text-lg font-bold uppercase text-darker">{data?.name}</h1>
                     </div>
                     <ul className={clsx(["flex flex-row justify-end gap-2 p-2 "])}>
-                        <li>
-                            <button
-                                className={clsx([
-                                    "bg-secondary",
-                                    "p-1 px-4",
-                                    "rounded-full flex items-center justify-center",
-                                    "button",
-                                ])}
-                            >
-                                <span className="text-xs font-bold text-white">Join</span>
-                            </button>
-                        </li>
-                        <li>
-                            <button
-                                className={clsx([
-                                    "bg-success",
-                                    "p-1 px-4",
-                                    "rounded-full flex items-center justify-center",
-                                    "button",
-                                ])}
-                            >
-                                <span className="text-xs font-bold text-white">Follow</span>
-                            </button>
-                        </li>
+                        {joined ? (
+                            <li>
+                                <button
+                                    onClick={handleJoin}
+                                    className={clsx([
+                                        "bg-error",
+                                        "p-1 px-4",
+                                        "rounded-full flex items-center justify-center",
+                                        "button",
+                                    ])}
+                                >
+                                    <span className="text-xs font-bold text-white">Leave</span>
+                                </button>
+                            </li>
+                        ) : (
+                            <>
+                                <li>
+                                    <button
+                                        onClick={handleJoin}
+                                        className={clsx([
+                                            "bg-primary",
+                                            "p-1 px-4",
+                                            "rounded-full flex items-center justify-center",
+                                            "button",
+                                        ])}
+                                    >
+                                        <span className="text-xs font-bold text-white">Join</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button
+                                        className={clsx([
+                                            "bg-success",
+                                            "p-1 px-4",
+                                            "rounded-full flex items-center justify-center",
+                                            "button",
+                                        ])}
+                                    >
+                                        <span className="text-xs font-bold text-white">Follow</span>
+                                    </button>
+                                </li>
+                            </>
+                        )}
                     </ul>
                 </div>
 

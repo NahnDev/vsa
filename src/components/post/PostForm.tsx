@@ -10,14 +10,14 @@ type TPostFormProps = {
 }
 
 export default function PostForm(props: TPostFormProps) {
-    const { aId = "" } = useParams()
+    const { aId = "", eId } = useParams()
     const [loading, setLoading] = useState(false)
     const [value, setValue] = useState<ReactQuill.Value | undefined>(undefined)
 
     const handlePublish = async () => {
         setLoading(true)
         try {
-            await PostApi.create({ content: value?.toString() || "", association: aId })
+            await PostApi.create({ content: value?.toString() || "", association: aId, event: eId })
         } finally {
             setLoading(false)
             props.onClose && props.onClose()
@@ -28,10 +28,10 @@ export default function PostForm(props: TPostFormProps) {
         <div className="grid grid-rows-[auto_1fr] h-full border-2 border-lightest rounded-md  ">
             <div className="flex flex-row p-4 gap-2 items-center justify-center">
                 <label htmlFor="" className="text-third text-sm font-bold uppercase">
-                    Lịch đăng bài:
+                    Đăng bài viết:
                 </label>
-                <input type="time" className="px-5 bg-white text-darker rounded-md"></input>
-                <input type="date" className="px-5 bg-white text-darker rounded-md"></input>
+                {/* <input type="time" className="px-5 bg-white text-darker rounded-md"></input>
+                <input type="date" className="px-5 bg-white text-darker rounded-md"></input> */}
                 <div className="flex-1"></div>
                 <button
                     onClick={handlePublish}

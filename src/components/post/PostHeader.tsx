@@ -18,7 +18,7 @@ export default function PostHeader(props: TPostHeaderProps) {
     const time = moment(props.data.at).format("HH:SS DD/MM/YYYY")
     const hasAuthor = !!props.data.sender
     return (
-        <div className="flex flex-row gap-2 items-center p-2">
+        <div className="flex flex-row gap-5 items-start p-2">
             {hasAuthor ? (
                 <UserThumbnail _id={props.data.sender}></UserThumbnail>
             ) : (
