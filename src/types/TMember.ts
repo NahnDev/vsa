@@ -5,4 +5,8 @@ type TMember = {
     role: string
     at: number
 }
+
+export type TCreateMember = {}
+export type TUpdateMember = Partial<Pick<TMember, "role">>
+
 export default TMember
