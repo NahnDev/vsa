@@ -22,8 +22,8 @@ export default function AssociationHomePage() {
 
     if (!data) return <div></div>
     return (
-        <div className="flex h-full">
-            <div className="grid grid-cols-[1fr] gap-2">
+        <div className="flex h-full w-full">
+            <div className="flex-1 grid grid-cols-[1fr] gap-2">
                 <div className="flex-[2] p-2 bg-white rounded-md  overflow-y-auto hide-scrollbar">
                     <div className="w-full rounded-md overflow-hidden" style={{ aspectRatio: 2 }}>
                         <Slide images={data.images}></Slide>

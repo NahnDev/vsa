@@ -1,4 +1,5 @@
-import { faPhone, faEnvelope } from "@fortawesome/free-solid-svg-icons"
+import { faIdCard } from "@fortawesome/free-regular-svg-icons"
+import { faPhone, faEnvelope, faCode, faHome } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import clsx from "clsx"
 import React, { useEffect, useMemo, useState } from "react"
@@ -104,7 +105,7 @@ export default function ProfileDetailPage() {
                                     <li className="flex flex-row gap-2 items-center">
                                         <FontAwesomeIcon icon={faEnvelope} />
                                         <a className="text-third " href="mailto:nahn.thanhnhan@gmail.com">
-                                            nahn.thanhnhan@gmail.com
+                                            {user.email}
                                         </a>
                                     </li>
                                     <li className="flex flex-row gap-2 items-center">
@@ -121,6 +122,33 @@ export default function ProfileDetailPage() {
                                 </ul>
                             </div>
                             <div className="p-5">
+                                <h4 className="font-bold text-dark text-lg">Contact info</h4>
+                                <ul className="flex flex-col px-5 p-1">
+                                    <li className="flex flex-row gap-2 items-center">
+                                        <FontAwesomeIcon icon={faIdCard} />
+                                        <Input
+                                            rounded
+                                            readOnly={!edit}
+                                            placeholder="Mã số sinh viên"
+                                            className="!bg-[transparent]"
+                                            value={dto.code ?? user.code}
+                                            onChangeText={(phone) => setDto({ ...dto, phone })}
+                                        />
+                                    </li>
+                                    <li className="flex flex-row gap-2 items-center">
+                                        <FontAwesomeIcon icon={faHome} />
+                                        <Input
+                                            rounded
+                                            readOnly={!edit}
+                                            placeholder="Địa chỉ"
+                                            className="!bg-[transparent] "
+                                            value={dto.address ?? user.address}
+                                            onChangeText={(phone) => setDto({ ...dto, phone })}
+                                        />
+                                    </li>
+                                </ul>
+                            </div>
+                            {/* <div className="p-5">
                                 <h4 className="font-bold text-dark  text-lg">Chức danh</h4>
                                 <ul className="flex flex-col px-5 p-1">
                                     <li>Ủy viên bản chấp hành Mỹ Thành Phước nhiệm kỳ 2022-2023</li>
@@ -154,7 +182,7 @@ export default function ProfileDetailPage() {
                                         />
                                     </div>
                                 </ul>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

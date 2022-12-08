@@ -13,6 +13,7 @@ export type TNavLinkProps = {
 export default function NavLink(props: TNavLinkProps) {
     const pathname = useLocation().pathname
     const active = props.checker.test(pathname)
+    console.log({ pathname })
 
     return (
         <li

@@ -8,7 +8,7 @@ const pages = [
         to: "./",
         icon: faGear,
         label: "Thiết lập",
-        checker: /\/$/,
+        checker: /events\/\w+\/?$/,
     },
     {
         to: "./volunteers",

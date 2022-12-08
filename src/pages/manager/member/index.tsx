@@ -1,4 +1,4 @@
-import { faPlus, faSearch, faUserGraduate } from "@fortawesome/free-solid-svg-icons"
+import { faPlus, faSearch, faTrash, faUserGraduate } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Dialog, Modal } from "@mui/material"
 import clsx from "clsx"
@@ -100,9 +100,11 @@ const initialPermission: TPermission = {
 function RoleZone(props: PropsWithChildren<{ data: TRole; onDrop: (member: TMember) => any }>) {
     const [collected, dropRef] = useDrop(() => ({ accept: "Member", drop: props.onDrop }), [props.onDrop])
     return (
-        <div ref={dropRef} className="p-5">
-            <RoleThumbnail data={props.data} />
-            <div className="flex flex-col bg-lightest gap-1 p-2 mx-5 pb-10">{props.children}</div>
+        <div ref={dropRef} className="p-5 ">
+            <div className="bg-lightest">
+                <RoleThumbnail data={props.data} />
+                <div className="flex flex-col  gap-1 p-2 mx-5 pb-10">{props.children}</div>
+            </div>
         </div>
     )
 }
@@ -245,10 +247,13 @@ function Checkbox(props: { label: string; value: boolean; onClick?: () => any })
 
 function RoleThumbnail(props: { data: TRole }) {
     return (
-        <div className="p-5">
+        <div className="p-5 justify-between flex flex-row">
             <div className=" flex flex-row items-center ">
                 <FontAwesomeIcon icon={faUserGraduate} />
                 <span className="px-2">{props.data.name}</span>
+            </div>
+            <div className="">
+                <FontAwesomeIcon icon={faTrash} />
             </div>
         </div>
     )

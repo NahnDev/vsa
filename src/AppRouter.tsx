@@ -1,5 +1,5 @@
-import React, { Suspense } from "react"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import React, { Suspense, useEffect } from "react"
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom"
 import AppLayout from "./AppLayout"
 import ManagerPage from "./pages/manager"
 import AssociationRouter from "./pages/association"
@@ -10,6 +10,8 @@ import HomePage from "./pages/home"
 import { useUser } from "./stores/user/hooks"
 
 export default function MainRouter() {
+    const { _id } = useUser()
+
     return (
         <Suspense fallback={<div />}>
             <BrowserRouter>

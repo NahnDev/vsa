@@ -3,6 +3,7 @@ import { faMailBulk, faMailForward, faMailReply } from "@fortawesome/free-solid-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import clsx from "clsx"
 import React, { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import SocialGroup from "../../../components/common/SocialGroup"
 import ResourceImage from "../../../components/image/ResourceImage"
 import UserApi from "../../../stores/api/UserApi"
@@ -34,10 +35,12 @@ export default function UserCard(props: { _id: string }) {
                         ])}
                     />
                 </div>
-                <div className="flex flex-col justify-center items-center">
-                    <h4 className="text-md text-dark">{user.fullName}</h4>
-                    <h5 className="text-sm text-gray">{user.name}</h5>
-                </div>
+                <Link to={`/profiles/${user._id}`}>
+                    <div className="flex flex-col justify-center items-center">
+                        <h4 className="text-md text-dark">{user.fullName}</h4>
+                        <h5 className="text-sm text-gray">{user.name}</h5>
+                    </div>
+                </Link>
                 <SocialGroup />
                 <div className="p-2 flex-1 justify-center items-">
                     <p className="text-sm text-center text-darkless">{user.introduce}</p>

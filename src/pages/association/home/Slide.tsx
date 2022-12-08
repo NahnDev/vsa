@@ -8,7 +8,7 @@ export default function Slide(props: { images: string[] }) {
             <Slider autoplay autoplaySpeed={5000} speed={500} infinite>
                 {props.images.map((image) => (
                     <div key={image}>
-                        <ResourceImage _id={image} />
+                        <ResourceImage _id={image} className="w-full h-full" />
                     </div>
                 ))}
             </Slider>

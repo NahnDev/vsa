@@ -58,12 +58,12 @@ const LINKS: TNavLinkProps[] = [
         label: "Bài viết",
         checker: /\/manager\/posts/,
     },
-    {
-        to: "./finance",
-        icon: faChartBar,
-        label: "Kinh phí",
-        checker: /\/manager\/finance/,
-    },
+    // {
+    //     to: "./finance",
+    //     icon: faChartBar,
+    //     label: "Kinh phí",
+    //     checker: /\/manager\/finance/,
+    // },
     {
         to: "./approval",
         icon: faCheckCircle,
@@ -81,9 +81,7 @@ export default function ManagerNavigator() {
                     <img className="w-5 h-5" src="/assets/images/logo.png" />
                     <h4 className="bold italic text-third">VSA Admin System</h4>
                 </span>
-                <div className="pb-4">
-                    <AssociationSelector />
-                </div>
+                <div className="pb-4">{/* <AssociationSelector /> */}</div>
 
                 <ul className={clsx(["flex flex-col gap-2"])}>
                     {LINKS.map((props) => (

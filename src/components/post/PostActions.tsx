@@ -2,7 +2,7 @@ import { faComment, faHeart } from "@fortawesome/free-regular-svg-icons"
 import { faShare } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import clsx from "clsx"
-import React, { useState } from "react"
+import React, { useMemo, useState } from "react"
 import PostApi from "../../stores/api/PostApi"
 import { useUser } from "../../stores/user/hooks"
 import TPost from "../../types/TPost"
@@ -13,17 +13,14 @@ type TPostActionProps = {
 export default function PostActions(props: TPostActionProps) {
     const { _id: uId } = useUser()
     const pId = props.data._id
-    const [count, setCount] = useState(props.data.likes.length)
-    const [liked, setLiked] = useState(props.data.likes.some((el) => uId === el))
+    const count = useMemo(() => props.data.likes.length, [props.data.likes])
+    const liked = useMemo(() => props.data.likes.some((el) => uId === el), [props.data.likes])
+
     const handleLikeClick = async () => {
         if (liked) {
             await PostApi.unlike(pId)
-            setLiked(false)
-            setCount(count - 1)
         } else {
             await PostApi.like(pId)
-            setLiked(true)
-            setCount(count + 1)
         }
     }
 

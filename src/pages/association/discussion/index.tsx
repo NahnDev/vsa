@@ -5,11 +5,13 @@ import Chat from "../../../components/chat"
 import Input from "../../../components/common/Input"
 import Post, { TPostProps } from "../../../components/post"
 import PostCreator from "../../../components/post/PostCreator"
+import { useSocket } from "../../../socket"
 import PostApi from "../../../stores/api/PostApi"
 import TPost from "../../../types/TPost"
 
 export default function AssociationDiscussionPage() {
     const { aId = "" } = useParams()
+    const socket = useSocket()
     const [posts, setPosts] = useState<TPost[]>([])
     const load = async () => {
         try {
@@ -22,6 +24,13 @@ export default function AssociationDiscussionPage() {
     useEffect(() => {
         load()
     }, [])
+    useEffect(() => {
+        const listener = (payload: TPost) => setPosts([payload, ...posts])
+        socket.on(`association/${aId}/post`, listener)
+        return () => {
+            socket.off(`association/${aId}/post`, listener)
+        }
+    }, [posts])
 
     return (
         <div className="w-full  flex flex-row relative">
@@ -30,7 +39,7 @@ export default function AssociationDiscussionPage() {
                 <ul>
                     <li>
                         {posts.map((post) => (
-                            <Post data={post} key={post._id} />
+                            <Post _id={post._id} key={post._id} />
                         ))}
                     </li>
                 </ul>

@@ -75,18 +75,18 @@ export default function OptionBar() {
                             </Link>
                         </li>
 
-                        <li className="button">
+                        {/* <li className="button">
                             <Badge badgeContent={1} color="info">
                                 <FontAwesomeIcon className="text-lg text-dark" icon={faBell} />
                             </Badge>
-                        </li>
+                        </li> */}
 
                         <li onClick={handleLogout} className="button">
                             <FontAwesomeIcon className="text-lg text-dark" icon={faSignOutAlt} />
                         </li>
-                        <li className="button">
+                        {/* <li className="button">
                             <FontAwesomeIcon className="text-lg text-dark" icon={faGear} />
-                        </li>
+                        </li> */}
                     </>
                 ) : (
                     <>

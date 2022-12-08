@@ -1,5 +1,6 @@
 import clsx from "clsx"
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
+import { useSocket } from "../../socket"
 import CommentApi from "../../stores/api/CommentApi"
 import TComment from "../../types/TComment"
 import TPost from "../../types/TPost"
@@ -8,14 +9,15 @@ import CommentCreator from "./CommentCreator"
 import PostCreator from "./PostCreator"
 
 export default function PostComment(props: { data: TPost }) {
+    const socket = useSocket()
     const [comments, setComments] = useState<TComment[]>([])
 
-    const load = async () => {
+    const load = useCallback(async () => {
         try {
             const comments = await CommentApi.findAll({ post: props.data._id })
             setComments(comments)
         } catch {}
-    }
+    }, [])
 
     const handleComment = async (content: string) => {
         if (!content) return
@@ -28,6 +30,13 @@ export default function PostComment(props: { data: TPost }) {
     useEffect(() => {
         load()
     }, [])
+
+    useEffect(() => {
+        socket.on(`post/${props.data._id}/comment`, load)
+        return () => {
+            socket.off(`post/${props.data._id}/comment`, load)
+        }
+    }, [load])
 
     return (
         <div>

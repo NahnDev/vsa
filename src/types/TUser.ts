@@ -15,6 +15,8 @@ type TUser = {
     roles: ERole
     introduce: string
     social: TSocial
+    code: string
+    address: string
 }
 
 export type TUserRef = Pick<TUser, "_id" | "name" | "avatar">

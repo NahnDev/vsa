@@ -8,6 +8,7 @@ import { PersistGate } from "redux-persist/integration/react"
 import "./App.css"
 import MainRouter from "./AppRouter"
 import FormEditor from "./components/form/FormEditor"
+import { SocketProvider } from "./socket"
 import store from "./stores"
 import { persistor } from "./stores/store"
 
@@ -15,13 +16,15 @@ moment.locale("vi")
 
 function App() {
     return (
-        <DndProvider backend={HTML5Backend}>
-            <Provider store={store}>
-                <PersistGate loading={null} persistor={persistor}>
-                    <MainRouter></MainRouter>
-                </PersistGate>
-            </Provider>
-        </DndProvider>
+        <SocketProvider>
+            <DndProvider backend={HTML5Backend}>
+                <Provider store={store}>
+                    <PersistGate loading={null} persistor={persistor}>
+                        <MainRouter></MainRouter>
+                    </PersistGate>
+                </Provider>
+            </DndProvider>
+        </SocketProvider>
     )
 }
 

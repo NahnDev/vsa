@@ -5,6 +5,7 @@ import {
     faBackspace,
     faCalendar,
     faForward,
+    faGear,
     faHeart,
     faHeartPulse,
     faHomeAlt,
@@ -29,7 +30,7 @@ const LINKS: TNavLinkProps[] = [
         to: "./",
         icon: faHomeAlt,
         label: "Trang chủ",
-        checker: /\/+$/,
+        checker: /^\/associations\/[a-zA-Z0-9]+\/?$/,
     },
     {
         to: "./discussion",
@@ -55,6 +56,12 @@ const LINKS: TNavLinkProps[] = [
         label: "Thành viên",
         checker: /\/members/,
     },
+    {
+        to: "./manager",
+        icon: faGear,
+        label: "Quản lý",
+        checker: /\/manager/,
+    },
 ]
 export default function AssociationNavigator() {
     const handleBack = () => window.history.back()
@@ -67,7 +74,10 @@ export default function AssociationNavigator() {
         await AssociationApi.join(aId)
         setJoined(true)
     }
-    const handleLeave = () => {}
+    const handleLeave = async () => {
+        await AssociationApi.leave(aId)
+        setJoined(false)
+    }
     const handleFollow = () => {}
 
     useEffect(() => {
@@ -92,7 +102,7 @@ export default function AssociationNavigator() {
                         {joined ? (
                             <li>
                                 <button
-                                    onClick={handleJoin}
+                                    onClick={handleLeave}
                                     className={clsx([
                                         "bg-error",
                                         "p-1 px-4",
