@@ -90,8 +90,8 @@ export default function MEventUpdatePage() {
                 </div>
                 <div className="p-2 flex">
                     <Editor
-                        value={dto.content || event.content}
-                        onChange={(value) => setDto({ ...dto, content: value?.toString() || "" })}
+                        value={dto.content ?? event.content}
+                        onChange={(value) => setDto({ ...dto, content: value?.toString()?? "" })}
                     />
                 </div>
                 <section className="p-2 py-5 flex-1">

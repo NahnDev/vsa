@@ -1,3 +1,4 @@
+import TAccessPermissions from "../../types/TAccessPermissions"
 import TAssociation, { TAssociationCreateDto, TAssociationUpdateDto } from "../../types/TAssociation"
 import TMember from "../../types/TMember"
 import axiosClient from "./axios"
@@ -30,5 +31,8 @@ export default class AssociationApi {
     }
     static async findAllMember(id: string) {
         return await axiosClient.get<any, TMember[]>(`/associations/${id}/members`)
+    }
+    static async getPermissions(id: string) {
+        return await axiosClient.get<any, TAccessPermissions>(`/associations/${id}/permissions`)
     }
 }

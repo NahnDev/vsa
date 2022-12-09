@@ -1,8 +1,10 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import clsx from "clsx"
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import { useParams } from "react-router-dom"
+import { ApprovalSubmitAccess } from "../../../components/access/ApprovalAccess"
+import { usePermissions } from "../../../stores/access/hooks"
 import ApprovalApi from "../../../stores/api/ApprovalApi"
 import TApproval from "../../../types/TApproval"
 import ApprovalCard from "./ApprovalCard"
@@ -10,6 +12,7 @@ import ApprovalCard from "./ApprovalCard"
 export default function ApprovalHomePage() {
     const { aId = "" } = useParams()
     const [approvals, setApprovals] = useState<TApproval[]>([])
+    const permission = usePermissions()
 
     const handleCreate = async () => {
         const approval = await ApprovalApi.create({ association: aId })
@@ -17,8 +20,13 @@ export default function ApprovalHomePage() {
     }
 
     const handleLoad = async () => {
-        const data = await ApprovalApi.findAll({ association: aId })
-        setApprovals(data)
+        if (permission.approval) {
+            const data = await ApprovalApi.findAll({ association: aId })
+            setApprovals(data)
+        } else if (permission.manager.unit) {
+            const data = await ApprovalApi.submitted({ association: aId })
+            setApprovals(data)
+        }
     }
 
     useEffect(() => {
@@ -31,19 +39,21 @@ export default function ApprovalHomePage() {
                 <h1 className="p-5 text-xl text-center text-dark font-bold uppercase">Phê duyệt</h1>
                 <div className="flex flex-row justify-end p-5">
                     <div className="">
-                        <button
-                            onClick={handleCreate}
-                            className={clsx([
-                                "flex flex-row justify-center items-center",
-                                "button",
-                                "gap-2 p-2 px-5",
-                                " text-white bg-success",
-                                " rounded-md",
-                            ])}
-                        >
-                            <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
-                            <span>Phê duyệt mới</span>
-                        </button>
+                        <ApprovalSubmitAccess>
+                            <button
+                                onClick={handleCreate}
+                                className={clsx([
+                                    "flex flex-row justify-center items-center",
+                                    "button",
+                                    "gap-2 p-2 px-5",
+                                    " text-white bg-success",
+                                    " rounded-md",
+                                ])}
+                            >
+                                <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
+                                <span>Phê duyệt mới</span>
+                            </button>
+                        </ApprovalSubmitAccess>
                     </div>
                 </div>
                 <div className="mt-2 ">

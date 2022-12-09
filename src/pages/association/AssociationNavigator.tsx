@@ -17,28 +17,35 @@ import { FontAwesomeIcon, FontAwesomeIconProps } from "@fortawesome/react-fontaw
 import clsx from "clsx"
 import React, { useEffect, useState } from "react"
 import { Link, LinkProps, RouteProps, useLocation, useParams, useRoutes } from "react-router-dom"
+import Access, { TAccessProps } from "../../components/access/Access"
+import MemberAccess from "../../components/access/MemberAccess"
 import NavLink, { TNavLinkProps } from "../../components/common/NavLink"
 import ResourceImage from "../../components/image/ResourceImage"
 import Image from "../../components/image/ResourceImage"
+import AccessActions from "../../stores/access/actions"
 import AssociationApi from "../../stores/api/AssociationApi"
+import { useAppDispatch } from "../../stores/hooks"
 import { useUser } from "../../stores/user/hooks"
 import TAssociation from "../../types/TAssociation"
 import AssociationChat from "./AssociationChat"
 
-const LINKS: TNavLinkProps[] = [
+const LINKS: (TNavLinkProps & { access: TAccessProps["checker"] })[] = [
     {
+        access: () => true,
         to: "./",
         icon: faHomeAlt,
         label: "Trang chủ",
         checker: /^\/associations\/[a-zA-Z0-9]+\/?$/,
     },
     {
+        access: (p) => p.member,
         to: "./discussion",
         icon: faNoteSticky,
         label: "Thảo luận",
         checker: /\/discussion/,
     },
     {
+        access: (p) => p.member,
         to: "./events",
         icon: faNoteSticky,
         label: "Sự kiện, hoạt động",
@@ -51,12 +58,14 @@ const LINKS: TNavLinkProps[] = [
     //     checker: /\/picture$/,
     // },
     {
+        access: (p) => p.member,
         to: "./members",
         icon: faUsers,
         label: "Thành viên",
         checker: /\/members/,
     },
     {
+        access: (p) => p.general || p.approval || p.doc || p.event || p.member || p.post || p.unit,
         to: "./manager",
         icon: faGear,
         label: "Quản lý",
@@ -64,6 +73,7 @@ const LINKS: TNavLinkProps[] = [
     },
 ]
 export default function AssociationNavigator() {
+    const dispatch = useAppDispatch()
     const handleBack = () => window.history.back()
     const { _id: uId = "" } = useUser()
     const { aId = "" } = useParams()
@@ -72,10 +82,12 @@ export default function AssociationNavigator() {
 
     const handleJoin = async () => {
         await AssociationApi.join(aId)
+        dispatch(AccessActions.load({ association: aId }))
         setJoined(true)
     }
     const handleLeave = async () => {
         await AssociationApi.leave(aId)
+        dispatch(AccessActions.load({ association: aId }))
         setJoined(false)
     }
     const handleFollow = () => {}
@@ -147,7 +159,9 @@ export default function AssociationNavigator() {
 
                 <ul className={clsx(["flex flex-col gap-2"])}>
                     {LINKS.map((props) => (
-                        <NavLink {...props}></NavLink>
+                        <Access checker={props.access}>
+                            <NavLink {...props}></NavLink>
+                        </Access>
                     ))}
                 </ul>
                 <div className="flex-1"></div>
@@ -158,6 +172,7 @@ export default function AssociationNavigator() {
                     <li className="button text-third">
                         <FontAwesomeIcon icon={faMessage} />
                     </li>
+
                     <li className="button text-secondary">
                         <FontAwesomeIcon className="" icon={faHeart} />
                     </li>

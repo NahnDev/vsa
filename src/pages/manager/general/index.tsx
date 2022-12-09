@@ -14,6 +14,7 @@ import { FontAwesomeIcon, FontAwesomeIconProps } from "@fortawesome/react-fontaw
 import clsx from "clsx"
 import React, { PropsWithChildren, useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom"
+import GeneralAccess from "../../../components/access/GeneralAccess"
 import AutoSaveButton from "../../../components/common/AutoSaveButton"
 import Input from "../../../components/common/Input"
 import Textarea from "../../../components/common/Textarea"
@@ -24,7 +25,14 @@ import AssociationApi from "../../../stores/api/AssociationApi"
 import TAssociation from "../../../types/TAssociation"
 import TResource from "../../../types/TResource"
 
-export default function ManagerGeneralPage() {
+export default function () {
+    return (
+        <GeneralAccess>
+            <ManagerGeneralPage />
+        </GeneralAccess>
+    )
+}
+function ManagerGeneralPage() {
     const [data, bounced, setData] = useDebounce<TAssociation | undefined>(undefined, 1000)
     const [loading, setLoading] = useState(false)
     const id = useParams()["aId"] || ""

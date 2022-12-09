@@ -44,7 +44,7 @@ export default function PackageColumn(props: TPackageColumnProps) {
     return (
         <div className="bg-lightest h-full flex-[3] px-5 justify-center items-center">
             <div className="flex flex-row p-2">
-                <h2 className="font-bold  p-2">Collections</h2>
+                <h2 className="font-bold  p-2">Gói tập tin</h2>
                 <div className="flex-1"></div>
                 <div className="flex justify-center items-center gap-5">
                     <FontAwesomeIcon onClick={handleCreate} className="button text-third" icon={faFolderPlus} />

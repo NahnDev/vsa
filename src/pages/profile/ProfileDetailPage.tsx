@@ -132,7 +132,7 @@ export default function ProfileDetailPage() {
                                             placeholder="Mã số sinh viên"
                                             className="!bg-[transparent]"
                                             value={dto.code ?? user.code}
-                                            onChangeText={(phone) => setDto({ ...dto, phone })}
+                                            onChangeText={(code) => setDto({ ...dto, code })}
                                         />
                                     </li>
                                     <li className="flex flex-row gap-2 items-center">
@@ -141,9 +141,9 @@ export default function ProfileDetailPage() {
                                             rounded
                                             readOnly={!edit}
                                             placeholder="Địa chỉ"
-                                            className="!bg-[transparent] "
+                                            className="!bg-[transparent] w-full "
                                             value={dto.address ?? user.address}
-                                            onChangeText={(phone) => setDto({ ...dto, phone })}
+                                            onChangeText={(address) => setDto({ ...dto, address })}
                                         />
                                     </li>
                                 </ul>

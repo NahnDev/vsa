@@ -9,11 +9,12 @@ type TAssociation = {
     manager?: string
     images: string[]
     logo: string
+    block: boolean
 }
 
 export type TAssociationCreateDto = Pick<TAssociation, "name" | "manager">
 export type TAssociationUpdateDto = Partial<
-    Pick<TAssociation, "name" | "uri" | "images" | "introduction" | "logo" | "social">
+    Pick<TAssociation, "name" | "uri" | "images" | "introduction" | "logo" | "social" | "block">
 >
 
 export default TAssociation

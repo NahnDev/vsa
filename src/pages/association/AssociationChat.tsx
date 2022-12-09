@@ -8,7 +8,7 @@ export default function AssociationChat() {
     const [expand, setExpand] = useState(false)
     return (
         <div className="fixed bottom-0 right-5 z-10">
-            {!expand ? (
+            {/* {!expand ? (
                 <div
                     onClick={() => setExpand(true)}
                     className={clsx([
@@ -31,7 +31,7 @@ export default function AssociationChat() {
                         <Chat onHeaderPress={() => setExpand(false)} />
                     </div>
                 </div>
-            )}
+            )} */}
         </div>
     )
 }

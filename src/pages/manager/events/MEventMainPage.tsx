@@ -14,7 +14,8 @@ export default function MEventMainPage() {
     const [events, setEvents] = useState<TEvent[]>([])
 
     const handleCreate = async () => {
-        EventApi.create({ association: aId }).then().finally()
+        await EventApi.create({ association: aId }).then().finally()
+        load()
     }
     const load = async () => {
         try {
@@ -58,7 +59,7 @@ export default function MEventMainPage() {
                     </div>
                     <div className="flex flex-col gap-2">
                         {events.map((event) => (
-                            <EventCard data={event} />
+                            <EventCard data={event} key={event._id} />
                         ))}
                     </div>
                 </div>

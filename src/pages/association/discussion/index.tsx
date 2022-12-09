@@ -46,15 +46,15 @@ export default function AssociationDiscussionPage() {
             </div>
             <div className="w-2"></div>
             <div className="bg-white  rounded-md h-full w-[20em] sticky top-0 z-0">
-                <section className="p-2">
-                    <h4 className="font-bold">Chủ đề</h4>
-                    <ul className="flex flex-row flex-wrap p-2 gap-2">
-                        <li className="button rounded-full px-5 bg-third text-white">Hopj le</li>
-                        <li className="button rounded-full px-5 bg-primary text-white">Su kien va hoat dong</li>
-                        <li className="button rounded-full px-5 bg-secondary text-white">Tuyen tinh nguyen vien</li>
-                        <li className="button rounded-full px-5 bg-success text-white">Khen thuong</li>
-                    </ul>
-                </section>
+                {/* <section className="p-2">
+                        <h4 className="font-bold">Chủ đề</h4>
+                        <ul className="flex flex-row flex-wrap p-2 gap-2">
+                            <li className="button rounded-full px-5 bg-third text-white">Hopj le</li>
+                            <li className="button rounded-full px-5 bg-primary text-white">Su kien va hoat dong</li>
+                            <li className="button rounded-full px-5 bg-secondary text-white">Tuyen tinh nguyen vien</li>
+                            <li className="button rounded-full px-5 bg-success text-white">Khen thuong</li>
+                        </ul>
+                    </section> */}
                 <section className="p-2">
                     <h4 className="font-bold">Search</h4>
                     <div className="">

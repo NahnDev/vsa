@@ -27,4 +27,7 @@ export default class ApprovalApi {
     static async submit(id: string, dto: { desc?: string }) {
         return await axiosClient.post<any, any>(`/approvals/${id}/submit`, dto)
     }
+    static async submitted(params: { association?: string }) {
+        return await axiosClient.get<any, TApproval[]>("/approvals/", { params: { ...params, submitted: true } })
+    }
 }

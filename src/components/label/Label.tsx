@@ -13,7 +13,7 @@ export default function Label(
                     "absolute -top-[0.5em] -right-[0.5em]",
                     "rounded-full",
                     "text-xs h-[1.5em] w-[1.5em]",
-                    "bg-success text-white",
+                    "bg-secondary text-white",
                     props.labelClassName,
                 ])}
             >

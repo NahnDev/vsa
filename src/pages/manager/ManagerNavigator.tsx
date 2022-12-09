@@ -18,41 +18,48 @@ import { FontAwesomeIcon, FontAwesomeIconProps } from "@fortawesome/react-fontaw
 import clsx from "clsx"
 import React from "react"
 import { Link, LinkProps, RouteProps, useLocation, useRoutes } from "react-router-dom"
+import Access, { TAccessProps } from "../../components/access/Access"
 import NavLink, { TNavLinkProps } from "../../components/common/NavLink"
 import AssociationSelector from "./components/AssociationSelector"
 
-const LINKS: TNavLinkProps[] = [
+const LINKS: (TNavLinkProps & { access: TAccessProps["checker"] })[] = [
     {
+        access: (p) => p.general || p.manager?.unit,
         to: "./",
         icon: faHomeAlt,
         label: "Thiết lập chung",
         checker: /\/manager\/?$/,
     },
     {
+        access: (p) => p.unit,
         to: "./units",
         icon: faNoteSticky,
         label: "Đơn vị",
         checker: /\/manager\/units/,
     },
     {
+        access: (p) => p.event,
         to: "./events",
         icon: faNoteSticky,
         label: "Sự kiện, hoạt động",
         checker: /\/manager\/events/,
     },
     {
+        access: (p) => p.doc,
         to: "./docs",
         icon: faImage,
         label: "Tài liệu",
         checker: /\/manager\/docs/,
     },
     {
+        access: (p) => p.member || p.manager?.unit,
         to: "./members",
         icon: faUsers,
         label: "Thành viên",
         checker: /\/manager\/members/,
     },
     {
+        access: (p) => p.post,
         to: "./posts",
         icon: faFileText,
         label: "Bài viết",
@@ -65,6 +72,7 @@ const LINKS: TNavLinkProps[] = [
     //     checker: /\/manager\/finance/,
     // },
     {
+        access: (p) => p.approval || p.manager?.unit,
         to: "./approval",
         icon: faCheckCircle,
         label: "Phê duyệt",
@@ -85,7 +93,9 @@ export default function ManagerNavigator() {
 
                 <ul className={clsx(["flex flex-col gap-2"])}>
                     {LINKS.map((props) => (
-                        <NavLink {...props}></NavLink>
+                        <Access checker={props.access}>
+                            <NavLink {...props}></NavLink>
+                        </Access>
                     ))}
                 </ul>
                 <div className="flex-1"></div>
