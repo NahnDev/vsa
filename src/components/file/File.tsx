@@ -17,7 +17,7 @@ export default function File(props: TFileProps) {
     const name = props.data.name
     const type = props.data.mineType.replace(/^.*\//, "") || "tex"
     const time = moment(+props.data.at).format("DD/MM/YYYY hh:mm:ss a")
-    const href = "http://localhost:8080" + props.data.uri
+    const href = process.env.REACT_APP_API_URL + props.data.uri
     return (
         <div className="">
             <div className="grid grid-cols-[auto_auto_1fr_auto_auto] w-full items-center gap-5 bg-white p-2">

@@ -9,7 +9,7 @@ const SocketContext = createContext<Socket | null>(null)
 
 export function SocketProvider(props: PropsWithChildren<{}>) {
     const socket = useRef(
-        io("ws://localhost:8080/", {
+        io(process.env.REACT_APP_WEBSOCKET || "", {
             reconnectionDelayMax: 10000,
         })
     ).current

@@ -46,7 +46,7 @@ export default function ImageUploader(props: PropsWithChildren<TImageUploaderPro
         ResourceApi.findOne(props.default).then(setResource)
     }, [])
 
-    const src = "http://localhost:8080" + resource?.uri
+    const src = (process.env.REACT_APP_API_URL || "") + resource?.uri
     return (
         <div
             onClick={() => inpRef.current?.click()}

@@ -2,7 +2,7 @@ import axios from "axios"
 import TToken from "../../types/TToken"
 
 const axiosClient = axios.create({
-    baseURL: process.env.REACT_APP_API_URL,
+    baseURL: process.env.REACT_APP_API_URL + "/api",
     headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
@@ -10,7 +10,7 @@ const axiosClient = axios.create({
 })
 let refreshing = false
 async function refreshToken(refreshToken: string) {
-    const response = await axios.get(`${process.env.REACT_APP_API_URL}auth/access-tokens`, {
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/auth/access-tokens`, {
         params: { refreshToken },
     })
     const newToken = {
