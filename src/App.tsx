@@ -11,6 +11,7 @@ import FormEditor from "./components/form/FormEditor"
 import { SocketProvider } from "./socket"
 import store from "./stores"
 import { persistor } from "./stores/store"
+import "react-loading-skeleton/dist/skeleton.css"
 
 moment.locale("vi")
 

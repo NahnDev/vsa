@@ -20,6 +20,7 @@ import Input from "../../../components/common/Input"
 import Textarea from "../../../components/common/Textarea"
 import TextareaResizable from "../../../components/common/TextareaResizable"
 import ImageUploader, { TImageUploaderProps } from "../../../components/image/ImageUploader"
+import Loading from "../../../components/loading/Loading"
 import useDebounce from "../../../hooks/useDebounce"
 import AssociationApi from "../../../stores/api/AssociationApi"
 import TAssociation from "../../../types/TAssociation"
@@ -59,7 +60,7 @@ function ManagerGeneralPage() {
         handleSave()
     }, [bounced])
 
-    if (!data) return <div className="">Loading</div>
+    if (!data) return <Loading />
     return (
         <div className="p-5 pl-0 h-full overflow-y-auto">
             <div className="bg-white rounded-md p-5">

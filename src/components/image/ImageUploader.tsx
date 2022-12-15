@@ -4,6 +4,7 @@ import clsx from "clsx"
 import React, { CSSProperties, PropsWithChildren, useEffect, useRef, useState } from "react"
 import ResourceApi from "../../stores/api/ResourceApi"
 import TResource from "../../types/TResource"
+import Loading from "../loading/Loading"
 import ResourceImage from "./ResourceImage"
 
 export type TImageUploaderProps = {
@@ -18,11 +19,13 @@ export type TImageUploaderProps = {
 }
 
 export default function ImageUploader(props: PropsWithChildren<TImageUploaderProps>) {
+    const [loading, setLoading] = useState(false)
     const [resource, setResource] = useState<TResource | undefined>(undefined)
     const [file, setFile] = useState<File | null>(null)
     const inpRef = useRef<HTMLInputElement>(null)
 
     const handleUpload = () => {
+        setLoading(true)
         props.onLoading && props.onLoading(true)
         if (file)
             ResourceApi.upload(file)
@@ -34,6 +37,7 @@ export default function ImageUploader(props: PropsWithChildren<TImageUploaderPro
                     props.onReject && props.onReject(e)
                 })
                 .finally(() => {
+                    setLoading(false)
                     props.onLoading && props.onLoading(false)
                 })
     }
@@ -67,7 +71,11 @@ export default function ImageUploader(props: PropsWithChildren<TImageUploaderPro
                     accept="image/png, image/gif, image/jpeg"
                 />
             </div>
-            {!resource ? (
+            {loading ? (
+                <Loading />
+            ) : resource ? (
+                <img src={src} className={clsx(["w-full"])} />
+            ) : (
                 <label
                     htmlFor=""
                     className="flex flex-1 flex-row gap-2 justify-center items-center text-darkless select-none"
@@ -75,8 +83,6 @@ export default function ImageUploader(props: PropsWithChildren<TImageUploaderPro
                     <FontAwesomeIcon icon={faUpload}></FontAwesomeIcon>
                     <span>{props.label ?? "Upload images"}</span>
                 </label>
-            ) : (
-                <img src={src} className={clsx(["w-full"])} />
             )}
         </div>
     )

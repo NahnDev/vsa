@@ -65,7 +65,7 @@ const LINKS: (TNavLinkProps & { access: TAccessProps["checker"] })[] = [
         checker: /\/members/,
     },
     {
-        access: (p) => p.general || p.approval || p.doc || p.event || p.member || p.post || p.unit,
+        access: (p) => p.general || p.approval || p.doc || p.event || p.member || p.post || p.unit || p.manager.unit,
         to: "./manager",
         icon: faGear,
         label: "Quản lý",
@@ -104,7 +104,12 @@ export default function AssociationNavigator() {
             <div className={clsx(["shadow-md h-full", "rounded-md", "p-5 bg-white", "flex flex-col"])}>
                 <div className="p-2">
                     <div className={clsx(["p-5 h-40 overflow-hidden", " flex justify-center items-center"])}>
-                        <ResourceImage _id={data?.logo} className="h-full rounded-full" alt="" />
+                        <ResourceImage
+                            _id={data?.logo}
+                            containerClassName="h-full"
+                            className="h-full rounded-full"
+                            alt=""
+                        />
                     </div>
                     <div>
                         <h6 className="text-xs uppercase text-dark">@{data?.uri}</h6>

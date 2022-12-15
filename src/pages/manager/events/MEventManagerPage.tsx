@@ -18,6 +18,7 @@ import Input from "../../../components/common/Input"
 import TextareaResizable from "../../../components/common/TextareaResizable"
 import FileColumn from "../../../components/file/FileColumn"
 import ImageUploader from "../../../components/image/ImageUploader"
+import Loading from "../../../components/loading/Loading"
 import Colors from "../../../constants/Colors"
 import EEventStatus, { StatusDescriptions } from "../../../enums/EEventStatus"
 import useDebounce from "../../../hooks/useDebounce"
@@ -56,7 +57,7 @@ export default function MEventUpdatePage() {
         load()
     }, [eId])
 
-    if (!event) return <div className="">Loading</div>
+    if (!event) return <Loading />
     return (
         <div className="bg-white rounded-md p-5">
             <AutoSaveButton loading={loading} onClick={handleSave} />
@@ -91,7 +92,7 @@ export default function MEventUpdatePage() {
                 <div className="p-2 flex">
                     <Editor
                         value={dto.content ?? event.content}
-                        onChange={(value) => setDto({ ...dto, content: value?.toString()?? "" })}
+                        onChange={(value) => setDto({ ...dto, content: value?.toString() ?? "" })}
                     />
                 </div>
                 <section className="p-2 py-5 flex-1">
