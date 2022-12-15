@@ -8,6 +8,7 @@ export type TAccessProps = PropsWithChildren<{
 
 export default function Access(props: TAccessProps) {
     const permissions = usePermissions()
+    // console.log({ permissions })
 
     return <>{props.checker(permissions) && props.children}</>
 }

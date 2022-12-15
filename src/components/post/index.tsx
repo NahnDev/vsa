@@ -14,6 +14,7 @@ export type TPostProps = {
 
 export default function Post(props: TPostProps) {
     const [data, setData] = useState<TPost | null>(null)
+    const [deleted, setDeleted] = useState(false)
     const socket = useSocket()
 
     const handleLoad = useCallback(async () => {
@@ -22,11 +23,16 @@ export default function Post(props: TPostProps) {
         const post = await PostApi.findOne(props._id)
         setData(post)
     }, [setData])
+    const handleDeleted = () => {
+        setDeleted(true)
+    }
 
     useEffect(() => {
         socket.on(`post/${props._id}/like`, handleLoad)
+        socket.on(`post/${props._id}/deleted`, handleDeleted)
         return () => {
             socket.off(`post/${props._id}/like`, handleLoad)
+            socket.off(`post/${props._id}/deleted`, handleDeleted)
         }
     }, [handleLoad])
 
@@ -34,6 +40,7 @@ export default function Post(props: TPostProps) {
         handleLoad()
     }, [])
 
+    if (deleted) return <></>
     if (!data) return <></>
     return (
         <div className="p-2">

@@ -1,4 +1,5 @@
 type TPermission = {
+    join: boolean
     general: boolean
     unit: boolean
     event: boolean

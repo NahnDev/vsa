@@ -48,7 +48,7 @@ export default function PostHeader(props: TPostHeaderProps) {
                         ])}
                     >
                         <Access checker={(permission) => permission.post}>
-                            <button className="button p-1 text-error flex flex-row items-center">
+                            <button onClick={handleDelete} className="button p-1 text-error flex flex-row items-center">
                                 <FontAwesomeIcon className="px-5" icon={faTrash} />
                                 <span>Xoá bài đăng</span>
                             </button>

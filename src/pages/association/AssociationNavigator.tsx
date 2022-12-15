@@ -38,14 +38,14 @@ const LINKS: (TNavLinkProps & { access: TAccessProps["checker"] })[] = [
         checker: /^\/associations\/[a-zA-Z0-9]+\/?$/,
     },
     {
-        access: (p) => p.member,
+        access: (p) => p.join,
         to: "./discussion",
         icon: faNoteSticky,
         label: "Thảo luận",
         checker: /\/discussion/,
     },
     {
-        access: (p) => p.member,
+        access: (p) => p.join,
         to: "./events",
         icon: faNoteSticky,
         label: "Sự kiện, hoạt động",
@@ -58,14 +58,14 @@ const LINKS: (TNavLinkProps & { access: TAccessProps["checker"] })[] = [
     //     checker: /\/picture$/,
     // },
     {
-        access: (p) => p.member,
+        access: (p) => p.join,
         to: "./members",
         icon: faUsers,
         label: "Thành viên",
         checker: /\/members/,
     },
     {
-        access: (p) => p.general || p.approval || p.doc || p.event || p.member || p.post || p.unit || p.manager.unit,
+        access: (p) => p.general || p.approval || p.doc || p.event || p.member || p.post || p.unit || p?.manager?.unit,
         to: "./manager",
         icon: faGear,
         label: "Quản lý",
@@ -174,13 +174,9 @@ export default function AssociationNavigator() {
                     <li className="button text-dark" onClick={handleBack}>
                         <FontAwesomeIcon icon={faArrowLeft} />
                     </li>
-                    <li className="button text-third">
-                        <FontAwesomeIcon icon={faMessage} />
-                    </li>
+                    <li className="button text-third">{/* <FontAwesomeIcon icon={faMessage} /> */}</li>
 
-                    <li className="button text-secondary">
-                        <FontAwesomeIcon className="" icon={faHeart} />
-                    </li>
+                    <li className="button text-secondary">{/* <FontAwesomeIcon className="" icon={faHeart} /> */}</li>
                 </ul>
             </div>
             <AssociationChat />

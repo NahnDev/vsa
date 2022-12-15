@@ -110,6 +110,7 @@ const initialPermission: TPermission = {
     member: false,
     post: false,
     unit: false,
+    join: true,
 }
 
 function RoleZone(

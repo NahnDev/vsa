@@ -23,7 +23,7 @@ export default function EventPoster(props: TEventPosterProps) {
                 <div className="w-full overflow-hidden" style={{ aspectRatio: "2/1" }}>
                     <ResourceImage _id={banner} />
                 </div>
-                <div className={clsx(["-mt-5 mx-auto justify-center p-2"])}>
+                <div className={clsx(["-mt-5 mx-auto justify-center p-2 z-10"])}>
                     <Link
                         to={`./${eId}`}
                         className={clsx(["bg-secondary ", "py-2 px-5  rounded-sm", "text-white font-semibold"])}
